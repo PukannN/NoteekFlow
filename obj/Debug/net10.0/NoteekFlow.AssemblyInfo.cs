@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NoteekFlow")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+77691158834cb6391717722e189ecf8da2a5dea3")]
 [assembly: System.Reflection.AssemblyProductAttribute("NoteekFlow")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NoteekFlow")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
