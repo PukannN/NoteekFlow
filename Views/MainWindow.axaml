@@ -3,20 +3,46 @@
         xmlns:vm="using:NoteekFlow.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800" 
         x:Class="NoteekFlow.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="NoteekFlow">
+        Title="NoteekFlow"
+        Width="1200"
+        Height="800">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainViewModel />
     </Design.DataContext>
+    
+    <SplitView IsPaneOpen="{Binding IsPaneOpen}" 
+            DisplayMode="CompactInline" 
+            CompactPaneLength="40" 
+            OpenPaneLength="200">
+        <SplitView.Pane>
+            <Grid RowDefinitions="Auto, *">
+                <Panel Grid.Row="0" Background="Gray">
+                    <StackPanel Margin="5" Spacing="5" Orientation="Horizontal">
+                        <Button Content="☰"
+                                Command="{Binding TogglePaneCommand}" 
+                                Width="30"/>
+                        
+                        <Button Content="📁"
+                                Command="{Binding OpenDirectoryCommand}"
+                                Width="30" />
+                    </StackPanel>
+                </Panel>
 
-    <TextBox Text="{Binding Greeting}"
-             HorizontalAlignment="Center"
-             VerticalAlignment="Center" />
-
+                <ListBox Grid.Row="1"
+                        ItemsSource="{Binding NavItems}"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        IsVisible="{Binding IsPaneOpen}"
+                        FontSize="12">
+                </ListBox>
+            </Grid>
+        </SplitView.Pane>
+    </SplitView>
 </Window>

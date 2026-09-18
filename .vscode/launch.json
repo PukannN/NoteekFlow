@@ -1,0 +1,30 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Avalonia: NoteekFlow",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/NoteekFlow.csproj"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/matej/OneDrive/Desktop/NoteekFlow/NoteekFlow",
+      "program": "c:/Users/matej/OneDrive/Desktop/NoteekFlow/NoteekFlow/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
