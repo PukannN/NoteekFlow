@@ -28,8 +28,10 @@
                         <Button Content="☰"
                                 Command="{Binding TogglePaneCommand}" 
                                 Width="30"/>
-                        
                         <Button Content="📁"
+                                Command="{Binding OpenDirectoryCommand}"
+                                Width="30" />
+                        <Button Content="Expand"
                                 Command="{Binding OpenDirectoryCommand}"
                                 Width="30" />
                     </StackPanel>
@@ -41,6 +43,8 @@
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         IsVisible="{Binding IsPaneOpen}"
                         FontSize="12">
+
+                        
                 </ListBox>
             </Grid>
         </SplitView.Pane>

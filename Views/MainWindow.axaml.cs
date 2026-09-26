@@ -2,7 +2,9 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Diagnostics;
 using System.Diagnostics;
+using System.Drawing;
 using NoteekFlow.ViewModels;
+
 
 namespace NoteekFlow.Views;
 
@@ -17,7 +19,6 @@ public partial class MainWindow : Window
     protected override void OnOpened(System.EventArgs e)
     {
         base.OnOpened(e);
-
         var topLevel = TopLevel.GetTopLevel(this);
         if (topLevel != null)
         {
@@ -26,6 +27,7 @@ public partial class MainWindow : Window
 
     }
 
+    
 
 
 }

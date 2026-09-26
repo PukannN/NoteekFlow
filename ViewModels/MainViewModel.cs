@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -20,7 +21,7 @@ public partial class MainViewModel : ViewModelBase
     private bool _isPaneOpen = true;
     
     [ObservableProperty]
-    private ObservableCollection<string> _navItems = DirectoryContent.GetDirectoryItems("c:\\Users\\matej\\OneDrive");
+    private ObservableCollection<string> _navItems = new();
 
     [ObservableProperty]
     private string _directoryPath = string.Empty; //A proper file path from the file explorer shall go here
@@ -29,6 +30,7 @@ public partial class MainViewModel : ViewModelBase
     {
         
     }
+    
     public MainViewModel(IStorageProvider storageProvider)
     {
         _storageProvider = storageProvider;
@@ -60,6 +62,7 @@ public partial class MainViewModel : ViewModelBase
             NavItems = DirectoryContent.GetDirectoryItems(DirectoryPath);
             
         }
+        
     }
     
 
