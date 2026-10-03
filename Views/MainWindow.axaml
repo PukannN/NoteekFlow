@@ -31,8 +31,8 @@
                         <Button Content="📁"
                                 Command="{Binding OpenDirectoryCommand}"
                                 Width="30" />
-                        <Button Content="Expand"
-                                Command="{Binding OpenDirectoryCommand}"
+                        <Button Content="➕"
+                                Command="{Binding CreateFileCommand}"
                                 Width="30" />
                     </StackPanel>
                 </Panel>

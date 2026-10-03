@@ -2,7 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -22,6 +26,9 @@ public partial class MainViewModel : ViewModelBase
     
     [ObservableProperty]
     private ObservableCollection<string> _navItems = new();
+
+    [ObservableProperty]
+    private string _defaultDirectoryPath = string.Empty;
 
     [ObservableProperty]
     private string _directoryPath = string.Empty; //A proper file path from the file explorer shall go here
@@ -62,6 +69,35 @@ public partial class MainViewModel : ViewModelBase
             NavItems = DirectoryContent.GetDirectoryItems(DirectoryPath);
             
         }
+        
+    }
+
+    [RelayCommand]
+    private async Task CreateFileAsync(string defaultContent)
+    {
+
+        if (_storageProvider == null) return;
+
+
+        var newFile = await _storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions{
+            Title = "Create New File",
+            DefaultExtension = ".txt",
+        });
+
+        if (newFile == null) 
+        {
+            Debug.Print("File creation canceled");
+            return;
+        } 
+        else Debug.Print("File succesfully created");
+        
+        await using var stream = await newFile.OpenWriteAsync();
+        using var writer = new StreamWriter(stream);
+        await writer.WriteLineAsync(defaultContent);
+        //NavItems = DirectoryContent.GetDirectoryItems(DirectoryPath);
+
+        
+
         
     }
     
