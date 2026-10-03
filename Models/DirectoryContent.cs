@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Platform.Storage;
+using System.Xml.Linq;
 
 class DirectoryContent
 {
@@ -27,6 +28,7 @@ class DirectoryContent
                 return Directory.EnumerateFileSystemEntries(directoryPath)
                                 .Select(Path.GetFileName)
                                 .OfType<string>()
+                                .OrderBy(Name => Name)
                                 .ToObservableCollection();
             }
         }

@@ -8,9 +8,12 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 
 namespace NoteekFlow.ViewModels;
 
@@ -19,11 +22,14 @@ public partial class MainViewModel : ViewModelBase
     private readonly IStorageProvider? _storageProvider;
 
     [ObservableProperty]
-    public partial string Greeting { get; set; } = "Welcome to Avalonia!";
+    private bool _isPaneOpen = true;
 
     [ObservableProperty]
-    private bool _isPaneOpen = true;
-    
+    [NotifyCanExecuteChangedFor(nameof(OpenFileCommand))]
+    private string _selectedFileName = string.Empty;
+
+    private bool CanProcessFile() => !string.IsNullOrEmpty(SelectedFileName);
+
     [ObservableProperty]
     private ObservableCollection<string> _navItems = new();
 
@@ -94,11 +100,31 @@ public partial class MainViewModel : ViewModelBase
         await using var stream = await newFile.OpenWriteAsync();
         using var writer = new StreamWriter(stream);
         await writer.WriteLineAsync(defaultContent);
-        //NavItems = DirectoryContent.GetDirectoryItems(DirectoryPath);
-
+        NavItems = DirectoryContent.GetDirectoryItems(DirectoryPath);
         
+    }
 
-        
+    [RelayCommand(CanExecute = nameof(CanProcessFile))]
+    private async Task OpenFile()
+    {
+        string fileName = SelectedFileName;
+        string directory = DirectoryPath;
+       
+        string fullPath = string.Empty;
+
+        try
+        {
+            fullPath = Path.Combine(directory, fileName);
+        }
+        catch
+        {
+           Debug.Print("Directory or file name is not valid"); 
+            
+        }
+
+
+        Debug.Print(fullPath);            
+
     }
     
 
