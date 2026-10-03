@@ -1,10 +1,9 @@
 <Window xmlns="https://github.com/avaloniaui"
-        xmlns:compilerservices="using:Microsoft.VisualBasic.CompilerServices"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:NoteekFlow.ViewModels"
+        xmlns:models="using:NoteekFlow.Models"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:system="using:System"
         mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800" 
         x:Class="NoteekFlow.Views.MainWindow"
         x:DataType="vm:MainViewModel"
@@ -14,54 +13,70 @@
         Height="800">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainViewModel />
     </Design.DataContext>
-    
+
     <SplitView IsPaneOpen="{Binding IsPaneOpen}" 
-            DisplayMode="CompactInline" 
-            CompactPaneLength="40"
-            OpenPaneLength="200">
+               DisplayMode="CompactInline" 
+               CompactPaneLength="40"
+               OpenPaneLength="220">
+               
         <SplitView.Pane>
-            <Grid RowDefinitions="Auto, *, Auto">
-                <Panel Grid.Row="0" Background="Gray">
+            <Grid RowDefinitions="Auto, *, Auto" Background="#1E1E1E">
+                
+                <Panel Grid.Row="0" Background="#252526">
                     <StackPanel Margin="5" Spacing="5" Orientation="Horizontal">
-                        <Button Content="☰"
-                                Command="{Binding TogglePaneCommand}" 
-                                Width="30"/>
-                        <Button Content="📖"
-                                Command="{Binding OpenFileCommand}"
-                                Width="30"/>
-                        <Button Content="📁"
-                                Command="{Binding OpenDirectoryCommand}"
-                                Width="30" />
-                        <Button Content="➕"
-                                Command="{Binding CreateFileCommand}"
-                                Width="30" />
+                        <Button Content="☰" Command="{Binding TogglePaneCommand}" Width="30" ToolTip.Tip="Toggle Pane"/>
+                        <Button Content="📁" Command="{Binding OpenDirectoryCommand}" Width="30" ToolTip.Tip="Open Workspace"/>
+                        <Button Content="➕" Command="{Binding CreateFileCommand}" Width="30" ToolTip.Tip="New File"/>
                     </StackPanel>
                 </Panel>
 
                 <ListBox Grid.Row="1"
-                        ItemsSource="{Binding NavItems}"
-                        SelectedItem="{Binding SelectedFileName, Mode=OneWayToSource}"
-                        IsVisible="{Binding IsPaneOpen}"
-                        ScrollViewer.VerticalScrollBarVisibility="Auto"
-                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                        FontSize="12">
-                        
+                         ItemsSource="{Binding NavFiles}"
+                         SelectedItem="{Binding SelectedFile}"
+                         IsVisible="{Binding IsPaneOpen}"
+                         Background="Transparent"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="models:FileItem">
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+
+                                <TextBlock Text="{Binding Name}" 
+                                           VerticalAlignment="Center" 
+                                           FontSize="13" 
+                                           Foreground="White"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
 
-                <Panel Grid.Row="2" Background="Gray">
-                     <StackPanel Margin="5" Spacing="5" Orientation="Horizontal">
-                        <Button Content="⚙️"
-                                Command="{Binding TogglePaneCommand}" 
-                                Width="30"/>
+                <Panel Grid.Row="2" Background="#252526">
+                    <StackPanel Margin="5" Spacing="5" Orientation="Horizontal">
+                        <Button Content="⚙️" Width="30" ToolTip.Tip="Settings"/>
                     </StackPanel>
-
                 </Panel>
 
             </Grid>
         </SplitView.Pane>
+
+        <SplitView.Content>
+            <Grid Background="#121212">
+                <!-- <TransitioningContentControl Content="{Binding CurrentEditorViewModel}">
+                    <TransitioningContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Select a .noteek or .md file from the sidebar to start editing."
+                                       Foreground="Gray"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="16"/>
+                        </DataTemplate>
+                    </TransitioningContentControl.ContentTemplate>
+                </TransitioningContentControl> -->
+            </Grid>
+        </SplitView.Content>
+
     </SplitView>
 </Window>

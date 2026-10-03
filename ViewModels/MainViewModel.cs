@@ -13,42 +13,41 @@ using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MsBox.Avalonia;
-using MsBox.Avalonia.Enums;
+using NoteekFlow.Models;
 
 namespace NoteekFlow.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
     private readonly IStorageProvider? _storageProvider;
+    private readonly DirectoryService _directoryService = new();
 
     [ObservableProperty]
     private bool _isPaneOpen = true;
 
     [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(OpenFileCommand))]
-    private string _selectedFileName = string.Empty;
-
-    private bool CanProcessFile() => !string.IsNullOrEmpty(SelectedFileName);
-
-    [ObservableProperty]
-    private ObservableCollection<string> _navItems = new();
-
-    [ObservableProperty]
-    private string _defaultDirectoryPath = string.Empty;
-
-    [ObservableProperty]
-    private string _directoryPath = string.Empty; //A proper file path from the file explorer shall go here
-
-    public MainViewModel()
-    {
-        
-    }
+    private ObservableCollection<FileItem> _navFiles = new();
     
+    [ObservableProperty]
+    private FileItem? _selectedFile;
+
+    partial void OnSelectedFileChanged(FileItem? value)
+    {
+        if (value != null && !value.IsDirectory)
+        {
+            OpenFile(value);
+        }
+    }
+
+    [ObservableProperty]
+    private string _directoryPath = string.Empty;
+
+    public MainViewModel(){}
+
     public MainViewModel(IStorageProvider storageProvider)
     {
         _storageProvider = storageProvider;
     }
-
 
     [RelayCommand]
     private void TogglePane()
@@ -64,7 +63,7 @@ public partial class MainViewModel : ViewModelBase
         
         var folders = await _storageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
         {
-            Title = "Select a Folder to Open",
+            Title = "Select a Workspaces Folder",
             AllowMultiple = false
         });
 
@@ -72,10 +71,10 @@ public partial class MainViewModel : ViewModelBase
         {
             var folder = folders[0];
             DirectoryPath = folder.TryGetLocalPath() ?? folder.Name;
-            NavItems = DirectoryContent.GetDirectoryItems(DirectoryPath);
-            
-        }
-        
+
+            _directoryService.LoadDirectory(DirectoryPath);
+            NavFiles = _directoryService.Items;            
+        }    
     }
 
     [RelayCommand]
@@ -84,10 +83,15 @@ public partial class MainViewModel : ViewModelBase
 
         if (_storageProvider == null) return;
 
+        var customFileType = new FilePickerFileType("Noteek Canvas")
+        {
+            Patterns = new[] {"*.noteek", "*.md"}
+        };
 
         var newFile = await _storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions{
             Title = "Create New File",
-            DefaultExtension = ".txt",
+            DefaultExtension = ".md",
+            FileTypeChoices = new[] {customFileType}
         });
 
         if (newFile == null) 
@@ -97,35 +101,48 @@ public partial class MainViewModel : ViewModelBase
         } 
         else Debug.Print("File succesfully created");
         
-        await using var stream = await newFile.OpenWriteAsync();
-        using var writer = new StreamWriter(stream);
-        await writer.WriteLineAsync(defaultContent);
-        NavItems = DirectoryContent.GetDirectoryItems(DirectoryPath);
+        var localPath = newFile.TryGetLocalPath();
+        if (!string.IsNullOrEmpty(localPath))
+        {
+            if (localPath.EndsWith(".noteek", StringComparison.OrdinalIgnoreCase))
+            {
+                var initialJson = "{\n \"version\",\n \"elements\": []\n}";
+                await File.WriteAllTextAsync(localPath, initialJson);
+            }
+            else
+            {
+                await File.WriteAllTextAsync(localPath, "# New Note");
+            }
+
+            if (!string.IsNullOrEmpty(DirectoryPath))
+            {
+                _directoryService.LoadDirectory(DirectoryPath);
+                NavFiles = _directoryService.Items;
+            }
+        }
         
     }
 
-    [RelayCommand(CanExecute = nameof(CanProcessFile))]
-    private async Task OpenFile()
+    private async Task OpenFile(FileItem file)
     {
-        string fileName = SelectedFileName;
-        string directory = DirectoryPath;
-       
-        string fullPath = string.Empty;
+        Debug.Print($"Opening file: {file.FullPath} (Type: {file.Type})");
 
-        try
+        switch (file.Type)
         {
-            fullPath = Path.Combine(directory, fileName);
+            case FileItemType.NoteekCanvas:
+                //load Canvas ViewModel
+                //CurrentEditorViewModel = new CanvasEditorViewModel(file.fullPath);
+                break;
+
+            case FileItemType.Markdown:
+                //CurrentEditorViewModel = new TextEditorViewModel(file.fullPath);
+                break;
+
+            default:
+                Debug.Print("Unssuported file type");
+                //add some kind of popup warning or just show the error in CurrentEditViewModel
+                break;
+               
         }
-        catch
-        {
-           Debug.Print("Directory or file name is not valid"); 
-            
-        }
-
-
-        Debug.Print(fullPath);            
-
     }
-    
-
 }
