@@ -138,6 +138,10 @@ public partial class MainViewModel : ViewModelBase
                 //CurrentEditorViewModel = new TextEditorViewModel(file.fullPath);
                 break;
 
+            case FileItemType.Image:
+                //CurrentEditorViewModel = new ImageEditorVideoModel(file.fullPath);
+                break;
+
             default:
                 Debug.Print("Unssuported file type");
                 //add some kind of popup warning or just show the error in CurrentEditViewModel

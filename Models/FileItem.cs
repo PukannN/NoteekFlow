@@ -18,6 +18,7 @@ public class FileItem
         : Path.GetExtension(FullPath).ToLowerInvariant() switch
         {
             ".md" => FileItemType.Markdown,
+            ".noteek" => FileItemType.NoteekCanvas,
             ".png" or ".jpeg" or ".jpg" or ".svg" => FileItemType.Image,
             _ => FileItemType.Unknown
         };
@@ -35,6 +36,5 @@ public class FileItem
         }
         
     }
-
 
 }
