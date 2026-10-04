@@ -77,6 +77,5 @@
                 </TransitioningContentControl> -->
             </Grid>
         </SplitView.Content>
-
     </SplitView>
 </Window>
