@@ -8,7 +8,7 @@ namespace NoteekFlow.Models;
 public class DirectoryService
 {
 
-    public string RootPath {get; private set;} = String.Empty;
+    public string RootPath {get; private set;} = string.Empty;
     public ObservableCollection<FileItem> Items { get; } = new();
 
     public void LoadDirectory(string directoryPath)

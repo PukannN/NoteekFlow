@@ -33,7 +33,7 @@ public partial class MainViewModel : ViewModelBase
 
     partial void OnSelectedFileChanged(FileItem? value)
     {
-        if (value != null && !value.IsDirectory)
+        if (value != null)
         {
             OpenFile(value);
         }
@@ -53,8 +53,14 @@ public partial class MainViewModel : ViewModelBase
     private void TogglePane()
     {
         IsPaneOpen = !IsPaneOpen;
-    }    
-    
+    }
+
+    private void UpdateNavDirectory(string directoryPath)
+    {
+        _directoryService.LoadDirectory(directoryPath);
+        NavFiles = _directoryService.Items;
+    }
+
     [RelayCommand]
     private async Task OpenDirectoryAsync()
     {
@@ -72,8 +78,7 @@ public partial class MainViewModel : ViewModelBase
             var folder = folders[0];
             DirectoryPath = folder.TryGetLocalPath() ?? folder.Name;
 
-            _directoryService.LoadDirectory(DirectoryPath);
-            NavFiles = _directoryService.Items;            
+            UpdateNavDirectory(DirectoryPath);
         }    
     }
 
@@ -116,8 +121,7 @@ public partial class MainViewModel : ViewModelBase
 
             if (!string.IsNullOrEmpty(DirectoryPath))
             {
-                _directoryService.LoadDirectory(DirectoryPath);
-                NavFiles = _directoryService.Items;
+                UpdateNavDirectory(DirectoryPath);
             }
         }
         
@@ -141,9 +145,14 @@ public partial class MainViewModel : ViewModelBase
             case FileItemType.Image:
                 //CurrentEditorViewModel = new ImageEditorVideoModel(file.fullPath);
                 break;
+            
+            case FileItemType.Folder:
+                // This sometimes throws an out of index error
+                //UpdateNavDirectory(file.FullPath);
+                break;
 
             default:
-                Debug.Print("Unssuported file type");
+                Debug.Print("Unsuported file type");
                 //add some kind of popup warning or just show the error in CurrentEditViewModel
                 break;
                

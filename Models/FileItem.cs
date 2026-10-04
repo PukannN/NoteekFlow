@@ -10,7 +10,6 @@ public class FileItem
     public string Name {get; private set;} = string.Empty;
     public string FullPath {get; private set;} = string.Empty;
     public bool IsDirectory {get; private set;}
-
     public ObservableCollection<FileItem> Children = new();
 
     public FileItemType Type => IsDirectory
