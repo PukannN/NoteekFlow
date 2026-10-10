@@ -18,7 +18,8 @@ public class FileItem
         {
             ".md" => FileItemType.Markdown,
             ".noteek" => FileItemType.NoteekCanvas,
-            ".png" or ".jpeg" or ".jpg" or ".svg" => FileItemType.Image,
+            ".png" or ".jpeg" or ".jpg" => FileItemType.Image,
+            ".txt" => FileItemType.Text,
             _ => FileItemType.Unknown
         };
 

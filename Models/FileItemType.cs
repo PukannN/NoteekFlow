@@ -7,5 +7,6 @@ public enum FileItemType
     Markdown,
     NoteekCanvas,
     Image,
-    Unknown
+    Text,
+    Unknown,
 }

@@ -20,52 +20,32 @@ namespace NoteekFlow.ViewModels;
 public partial class MainViewModel : ViewModelBase
 {
     private readonly IStorageProvider? _storageProvider;
-    private readonly DirectoryService _directoryService = new();
 
-    [ObservableProperty]
-    private bool _isPaneOpen = true;
-
-    [ObservableProperty]
-    private ObservableCollection<FileItem> _navFiles = new();
+    [ObservableProperty] private FileContentViewModel? _currentEditorViewModel;
+    [ObservableProperty] private bool _isPaneOpen = true;
+    [ObservableProperty] private string _directoryPath = string.Empty;
     
-    [ObservableProperty]
-    private FileItem? _selectedFile;
+    public FileExplorerViewModel FileExplorer { get; }
 
-    partial void OnSelectedFileChanged(FileItem? value)
+    public MainViewModel()
     {
-        if (value != null)
-        {
-            OpenFile(value);
-        }
+        FileExplorer = new FileExplorerViewModel(vm => CurrentEditorViewModel = vm);
+
+        CurrentEditorViewModel = new DefaultWorkspaceViewModel();
     }
 
-    [ObservableProperty]
-    private string _directoryPath = string.Empty;
-
-    public MainViewModel(){}
-
-    public MainViewModel(IStorageProvider storageProvider)
+    public MainViewModel(IStorageProvider storageProvider) : this()
     {
         _storageProvider = storageProvider;
     }
 
     [RelayCommand]
-    private void TogglePane()
-    {
-        IsPaneOpen = !IsPaneOpen;
-    }
-
-    private void UpdateNavDirectory(string directoryPath)
-    {
-        _directoryService.LoadDirectory(directoryPath);
-        NavFiles = _directoryService.Items;
-    }
+    private void TogglePane() => IsPaneOpen = !IsPaneOpen;
 
     [RelayCommand]
     private async Task OpenDirectoryAsync()
     {
         if (_storageProvider == null) return;
-
         
         var folders = await _storageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
         {
@@ -75,10 +55,10 @@ public partial class MainViewModel : ViewModelBase
 
         if (folders.Count > 0)
         {
-            var folder = folders[0];
-            DirectoryPath = folder.TryGetLocalPath() ?? folder.Name;
-
-            UpdateNavDirectory(DirectoryPath);
+            DirectoryPath = folders[0].TryGetLocalPath() ?? folders[0].Name;
+            
+            // Delegate the loading to the explorer child component
+            FileExplorer.UpdateNavDirectory(DirectoryPath);
         }    
     }
 
@@ -121,41 +101,10 @@ public partial class MainViewModel : ViewModelBase
 
             if (!string.IsNullOrEmpty(DirectoryPath))
             {
-                UpdateNavDirectory(DirectoryPath);
+                FileExplorer.UpdateNavDirectory(DirectoryPath);
             }
         }
         
     }
 
-    private async Task OpenFile(FileItem file)
-    {
-        Debug.Print($"Opening file: {file.FullPath} (Type: {file.Type})");
-
-        switch (file.Type)
-        {
-            case FileItemType.NoteekCanvas:
-                //load Canvas ViewModel
-                //CurrentEditorViewModel = new CanvasEditorViewModel(file.fullPath);
-                break;
-
-            case FileItemType.Markdown:
-                //CurrentEditorViewModel = new TextEditorViewModel(file.fullPath);
-                break;
-
-            case FileItemType.Image:
-                //CurrentEditorViewModel = new ImageEditorVideoModel(file.fullPath);
-                break;
-            
-            case FileItemType.Folder:
-                // This sometimes throws an out of index error
-                //UpdateNavDirectory(file.FullPath);
-                break;
-
-            default:
-                Debug.Print("Unsuported file type");
-                //add some kind of popup warning or just show the error in CurrentEditViewModel
-                break;
-               
-        }
-    }
 }

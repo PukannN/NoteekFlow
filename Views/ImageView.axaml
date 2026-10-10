@@ -1,0 +1,11 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:NoteekFlow.ViewModels"
+             x:DataType="vm:ImageVisualizerViewModel"
+             x:Class="NoteekFlow.Views.ImageView">
+    <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+        <Image Source="{Binding ImageSource}" 
+                Stretch="None"
+                />
+    </ScrollViewer>
+</UserControl>
