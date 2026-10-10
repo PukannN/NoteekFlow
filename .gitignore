@@ -7,6 +7,7 @@
 .env
 
 bin/
+.vscode/
 
 # User-specific files
 *.rsuser
