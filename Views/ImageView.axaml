@@ -3,9 +3,15 @@
              xmlns:vm="using:NoteekFlow.ViewModels"
              x:DataType="vm:ImageVisualizerViewModel"
              x:Class="NoteekFlow.Views.ImageView">
-    <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+    
+    <ScrollViewer HorizontalScrollBarVisibility="Visible"
+                  VerticalScrollBarVisibility="Visible">
         <Image Source="{Binding ImageSource}" 
-                Stretch="None"
-                />
+                Stretch="None">       
+            <Image.RenderTransform>
+                <ScaleTransform ScaleX="1" ScaleY="1"/>
+            </Image.RenderTransform>
+        </Image>
     </ScrollViewer>
+
 </UserControl>

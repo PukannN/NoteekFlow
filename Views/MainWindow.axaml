@@ -37,8 +37,7 @@
                OpenPaneLength="220">
                
         <SplitView.Pane>
-            <Grid RowDefinitions="Auto, *, Auto" Background="#1E1E1E">
-                
+            <Grid RowDefinitions="Auto, *, Auto" Background="#1E1E1E"> 
                 <Panel Grid.Row="0" Background="#252526">
                     <StackPanel Margin="5" Spacing="5" Orientation="Horizontal">
                         <Button Content="☰" Command="{Binding TogglePaneCommand}" Width="30" ToolTip.Tip="Toggle Pane"/>
@@ -54,6 +53,14 @@
                          Background="Transparent"
                          ScrollViewer.VerticalScrollBarVisibility="Auto"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                
+                <!-- Should look more into this -->
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Copy"/>
+                            <MenuItem Header="Paste"/>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
                     
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="models:FileItem">
@@ -62,23 +69,23 @@
                                 <TextBlock Text="{Binding Name}" 
                                            VerticalAlignment="Center" 
                                            FontSize="13" 
-                                           Foreground="White"/>
+                                           Foreground="White">
+                                </TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
 
-                <Panel Grid.Row="2" Background="#252526">
+                <Panel Grid.Row="2" Background="#252525">
                     <StackPanel Margin="5" Spacing="5" Orientation="Horizontal">
                         <Button Content="⚙️" Width="30" ToolTip.Tip="Settings"/>
                     </StackPanel>
                 </Panel>
-
             </Grid>
         </SplitView.Pane>
 
         <SplitView.Content>
-            <Grid Background="#121212">
+            <Grid Background="#202020">
                     <TransitioningContentControl Content="{Binding CurrentEditorViewModel}"/>
             </Grid>
         </SplitView.Content>
