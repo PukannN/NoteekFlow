@@ -25,8 +25,12 @@
             <views:DefaultWorkspaceView/>
         </DataTemplate>
     
-        <DataTemplate DataType="{x:Type vm:ImageVisualizerViewModel}">
+        <DataTemplate DataType="{x:Type vm:ImageViewModel}">
             <views:ImageView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:PdfViewModel}">
+            <views:PdfView />
         </DataTemplate>
 
     </Window.DataTemplates>
@@ -54,7 +58,7 @@
                          ScrollViewer.VerticalScrollBarVisibility="Auto"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 
-                <!-- Should look more into this -->
+                <!-- Should look more into this for user control -->
                     <ListBox.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Copy"/>

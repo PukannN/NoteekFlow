@@ -21,9 +21,14 @@ public partial class MainViewModel : ViewModelBase
 {
     private readonly IStorageProvider? _storageProvider;
 
-    [ObservableProperty] private FileContentViewModel? _currentEditorViewModel;
-    [ObservableProperty] private bool _isPaneOpen = true;
-    [ObservableProperty] private string _directoryPath = string.Empty;
+    [ObservableProperty] 
+    private FileContentViewModel? _currentEditorViewModel;
+    
+    [ObservableProperty] 
+    private bool _isPaneOpen = true;
+    
+    [ObservableProperty] 
+    private string _directoryPath = string.Empty;
     
     public FileExplorerViewModel FileExplorer { get; }
 
@@ -68,7 +73,7 @@ public partial class MainViewModel : ViewModelBase
 
         if (_storageProvider == null) return;
 
-        var customFileType = new FilePickerFileType("Noteek Canvas")
+        var customFileType = new FilePickerFileType("Noteek")
         {
             Patterns = new[] {"*.noteek", "*.md"}
         };

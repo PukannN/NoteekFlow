@@ -13,14 +13,15 @@ public class FileItem
     public ObservableCollection<FileItem> Children = new();
 
     public FileItemType Type => IsDirectory
-        ? FileItemType.Folder
+        ? FileItemType.FOLDER
         : Path.GetExtension(FullPath).ToLowerInvariant() switch
         {
-            ".md" => FileItemType.Markdown,
-            ".noteek" => FileItemType.NoteekCanvas,
-            ".png" or ".jpeg" or ".jpg" => FileItemType.Image,
-            ".txt" => FileItemType.Text,
-            _ => FileItemType.Unknown
+            ".noteek" => FileItemType.NOTEEK,
+            ".md" => FileItemType.MARKDOWN,
+            ".png" or ".jpeg" or ".jpg" => FileItemType.IMAGE,
+            ".pdf" => FileItemType.PDF,
+            ".txt" => FileItemType.TEXT,
+            _ => FileItemType.UNKNOWN
         };
 
     public FileItem(){}

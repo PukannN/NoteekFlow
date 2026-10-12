@@ -3,6 +3,7 @@
              xmlns:vm="using:NoteekFlow.ViewModels"
              x:DataType="vm:DefaultWorkspaceViewModel"
              x:Class="NoteekFlow.Views.DefaultWorkspaceView">
+             
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <TextBlock Text="Select a file from the sidebar to start editing."
                    Foreground="Gray"

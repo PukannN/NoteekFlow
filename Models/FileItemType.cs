@@ -3,10 +3,11 @@ namespace NoteekFlow.Models;
 
 public enum FileItemType
 {
-    Folder,
-    Markdown,
-    NoteekCanvas,
-    Image,
-    Text,
-    Unknown,
+    FOLDER,
+    MARKDOWN,
+    NOTEEK,
+    IMAGE,
+    PDF,
+    TEXT,
+    UNKNOWN,
 }

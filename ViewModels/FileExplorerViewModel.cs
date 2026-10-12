@@ -44,17 +44,21 @@ public partial class FileExplorerViewModel : ViewModelBase
         if (!File.Exists(file.FullPath))
         {
             Debug.Print($"File missing: {file.FullPath}");
+            _onEditorChanged(new DefaultWorkspaceViewModel
+                {
+                    
+                });
             return;
         }
 
         switch (file.Type)
         {
-            case FileItemType.NoteekCanvas:
+            case FileItemType.NOTEEK:
                 Debug.Print("Loading Canvas format");
     
                 break;
 
-            case FileItemType.Markdown:
+            case FileItemType.MARKDOWN:
                 Debug.Print("Loading Markdown format");
                 // _onEditorChanged(new TextEditorViewModel
                 // {
@@ -63,25 +67,31 @@ public partial class FileExplorerViewModel : ViewModelBase
                 // });
                 break;
 
-             case FileItemType.Text:
+             case FileItemType.TEXT:
                 Debug.Print("Loading Text format");
 
                 break;
 
 
-            case FileItemType.Image:
+            case FileItemType.IMAGE:
                 Debug.Print("Loading Image format");
-                var imageViewModel = new ImageVisualizerViewModel();
+                var imageViewModel = new ImageViewModel();
                 _ = imageViewModel.LoadImageAsync(file.FullPath);
                 _onEditorChanged(imageViewModel);
                 break;
             
-            case FileItemType.Folder:
-                Debug.Print("Loading Folder format");
-
+            case FileItemType.PDF:
+                Debug.Print("Loading PDF format");
+                var pdfViewModel = new PdfViewModel();
+                pdfViewModel.FileSource = file.FullPath;
+                _onEditorChanged(pdfViewModel);
                 break;
 
-            case FileItemType.Unknown:
+            case FileItemType.FOLDER:
+                Debug.Print("Loading Folder format");
+                break;
+
+            case FileItemType.UNKNOWN:
                 Debug.Print("Unknown file format");
                 _onEditorChanged(new DefaultWorkspaceViewModel
                 {
