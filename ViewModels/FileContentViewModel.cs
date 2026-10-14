@@ -26,7 +26,7 @@ public partial class DefaultWorkspaceViewModel : FileContentViewModel
 
 }
 
-public partial class ImageVisualizerViewModel : FileContentViewModel
+public partial class ImageViewModel : FileContentViewModel
 {
     [ObservableProperty] 
     private Bitmap? _imageSource;
@@ -39,7 +39,6 @@ public partial class ImageVisualizerViewModel : FileContentViewModel
         try
         {
             byte[] fileBytes = await Task.Run(() => File.ReadAllBytes(filePath));
-
             await Dispatcher.UIThread.InvokeAsync(() =>
             {
                 ImageSource?.Dispose();
@@ -54,7 +53,12 @@ public partial class ImageVisualizerViewModel : FileContentViewModel
         {
             Debug.Print($"Error loading image: {ex.Message}");
             ImageSource = null;
-        }
-        
+        }   
     }
+}
+
+public partial class PdfViewModel : FileContentViewModel
+{
+    [ObservableProperty]
+    private string? _fileSource;
 }
