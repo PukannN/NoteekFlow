@@ -9,8 +9,7 @@ public class DirectoryService
 {
 
     public string RootPath {get; private set;} = string.Empty;
-    public ObservableCollection<FileItem> Items { get; } = new();
-
+    public ObservableCollection<FileItem> Items { get;set;} = new();
     public void LoadDirectory(string directoryPath)
     {
         Items.Clear();
@@ -19,10 +18,8 @@ public class DirectoryService
         if(string.IsNullOrWhiteSpace(directoryPath) || !Directory.Exists(directoryPath)) return;
 
         var rootItems = FetchDirectoryItems(directoryPath);
-        foreach(var item in rootItems)
-        {
-            Items.Add(item);
-        }
+        
+        Items = new ObservableCollection<FileItem>(rootItems);
     } 
 
     private static List<FileItem> FetchDirectoryItems(string path)
