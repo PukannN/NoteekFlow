@@ -61,4 +61,5 @@ public partial class PdfViewModel : FileContentViewModel
 {
     [ObservableProperty]
     private string? _fileSource;
+    
 }

@@ -11,7 +11,8 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="NoteekFlow"
         Width="1200"
-        Height="800">
+        Height="800"
+        WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
         <vm:MainViewModel />
@@ -56,7 +57,9 @@
                          IsVisible="{Binding IsPaneOpen}"
                          Background="Transparent"
                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         ToolTip.Tip="Click to view"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
                 
                 <!-- Should look more into this for user control -->
                     <ListBox.ContextMenu>
