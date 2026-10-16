@@ -1,0 +1,88 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:NoteekFlow.ViewModels"
+             xmlns:loc="using:NoteekFlow.Resources"
+             xmlns:controls="using:NoteekFlow.Controls"
+             x:Class="NoteekFlow.Views.NoteekView"
+             x:DataType="vm:NoteekViewModel">
+    <Grid RowDefinitions="Auto,*" Background="{DynamicResource AppBackground}">
+        <Border Grid.Row="0" Background="{DynamicResource PanelBackground}" BorderBrush="{DynamicResource PanelBorder}" BorderThickness="0,0,0,1">
+            <Grid RowDefinitions="Auto,Auto" Margin="12,5">
+                <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto">
+                    <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding ErrorMessage}" Foreground="{DynamicResource ErrorForeground}" VerticalAlignment="Center" />
+                        <TextBlock Text="{x:Static loc:Strings.CanvasHint}"
+                                   Foreground="{DynamicResource TextSecondary}"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                    <Button Grid.Column="1"
+                            Content="−"
+                            Command="{Binding ZoomOutCommand}"
+                            ToolTip.Tip="{x:Static loc:Strings.ZoomOut}"
+                            Classes="toolbar"
+                            Margin="0,0,4,0" />
+                    <Button Grid.Column="2"
+                            Content="{Binding ZoomLabel}"
+                            Command="{Binding ResetZoomCommand}"
+                            ToolTip.Tip="{x:Static loc:Strings.ResetZoom}"
+                            Classes="toolbar"
+                            Margin="0,0,4,0" />
+                    <Button Grid.Column="3"
+                            Content="+"
+                            Command="{Binding ZoomInCommand}"
+                            ToolTip.Tip="{x:Static loc:Strings.ZoomIn}"
+                            Classes="toolbar"
+                            Margin="0,0,8,0" />
+                    <Button Grid.Column="4"
+                            Content="{x:Static loc:Strings.Edit}"
+                            Command="{Binding ShowEditCommand}"
+                            ToolTip.Tip="{x:Static loc:Strings.CanvasEditTooltip}"
+                            Classes="toolbar"
+                            Margin="0,0,5,0" />
+                    <Button Grid.Column="5"
+                            Content="{x:Static loc:Strings.Preview}"
+                            Command="{Binding ShowPreviewCommand}"
+                            ToolTip.Tip="{x:Static loc:Strings.CanvasPreviewTooltip}"
+                            Classes="toolbar" />
+                </Grid>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                    <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,5,0,0">
+                        <Button Content="{x:Static loc:Strings.PenTool}" Command="{Binding SetToolCommand}" CommandParameter="Pen" Classes="toolbar" ToolTip.Tip="{x:Static loc:Strings.PenTool}" />
+                        <Button Content="{x:Static loc:Strings.RectangleTool}" Command="{Binding SetToolCommand}" CommandParameter="Rectangle" Classes="toolbar" ToolTip.Tip="{x:Static loc:Strings.RectangleTool}" />
+                        <Button Content="{x:Static loc:Strings.EllipseTool}" Command="{Binding SetToolCommand}" CommandParameter="Ellipse" Classes="toolbar" ToolTip.Tip="{x:Static loc:Strings.EllipseTool}" />
+                        <Button Content="{x:Static loc:Strings.LineTool}" Command="{Binding SetToolCommand}" CommandParameter="Line" Classes="toolbar" ToolTip.Tip="{x:Static loc:Strings.LineTool}" />
+                        <Button Content="{x:Static loc:Strings.TextTool}" Command="{Binding SetToolCommand}" CommandParameter="Text" Classes="toolbar" ToolTip.Tip="{x:Static loc:Strings.TextTool}" />
+                        <Button Content="{x:Static loc:Strings.EraserTool}" Command="{Binding SetToolCommand}" CommandParameter="Eraser" Classes="toolbar" ToolTip.Tip="{x:Static loc:Strings.EraserTool}" />
+                        <Border Width="1" Margin="3,2" Background="{DynamicResource PanelBorder}" />
+                        <Button Background="#20242B" Width="22" Height="24" Command="{Binding SetStrokeColorCommand}" CommandParameter="#20242B" ToolTip.Tip="{x:Static loc:Strings.InkDark}" />
+                        <Button Background="#C0392B" Width="22" Height="24" Command="{Binding SetStrokeColorCommand}" CommandParameter="#C0392B" ToolTip.Tip="{x:Static loc:Strings.InkRed}" />
+                        <Button Background="#2471A3" Width="22" Height="24" Command="{Binding SetStrokeColorCommand}" CommandParameter="#2471A3" ToolTip.Tip="{x:Static loc:Strings.InkBlue}" />
+                        <Button Background="#148F77" Width="22" Height="24" Command="{Binding SetStrokeColorCommand}" CommandParameter="#148F77" ToolTip.Tip="{x:Static loc:Strings.InkGreen}" />
+                        <Border Width="1" Margin="3,2" Background="{DynamicResource PanelBorder}" />
+                        <TextBlock Text="{x:Static loc:Strings.StrokeWidth}" Foreground="{DynamicResource TextSecondary}" VerticalAlignment="Center" />
+                        <Button Content="−" Command="{Binding DecreaseStrokeWidthCommand}" Classes="toolbar" ToolTip.Tip="{x:Static loc:Strings.StrokeWidth}" />
+                        <TextBlock Text="{Binding StrokeWidth}" MinWidth="24" Foreground="{DynamicResource TextPrimary}" VerticalAlignment="Center" TextAlignment="Center" />
+                        <Button Content="+" Command="{Binding IncreaseStrokeWidthCommand}" Classes="toolbar" ToolTip.Tip="{x:Static loc:Strings.StrokeWidth}" />
+                        <Border Width="1" Margin="3,2" Background="{DynamicResource PanelBorder}" />
+                        <Button Background="#FBFAF7" Width="22" Height="24" Command="{Binding SetBackgroundColorCommand}" CommandParameter="#FBFAF7" ToolTip.Tip="{x:Static loc:Strings.BackgroundLight}" />
+                        <Button Background="#FFFFFF" Width="22" Height="24" Command="{Binding SetBackgroundColorCommand}" CommandParameter="#FFFFFF" ToolTip.Tip="{x:Static loc:Strings.BackgroundWhite}" />
+                        <Button Background="#20242B" Width="22" Height="24" Command="{Binding SetBackgroundColorCommand}" CommandParameter="#20242B" ToolTip.Tip="{x:Static loc:Strings.BackgroundDark}" />
+                        <ToggleButton Content="{x:Static loc:Strings.Grid}" IsChecked="{Binding ShowGrid}" Classes="toolbar" ToolTip.Tip="{x:Static loc:Strings.Grid}" />
+                        <Button Content="{x:Static loc:Strings.ClearCanvas}" Command="{Binding ClearCanvasCommand}" IsEnabled="{Binding IsEditing}" Classes="toolbar" ToolTip.Tip="{x:Static loc:Strings.ClearCanvas}" Margin="4,0,0,0" />
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+        <controls:InkCanvasControl Grid.Row="1"
+                                   x:Name="InkCanvas"
+                                   Strokes="{Binding Strokes}"
+                                   Tool="{Binding CurrentTool}"
+                                   StrokeColor="{Binding StrokeColor}"
+                                   StrokeWidth="{Binding StrokeWidth}"
+                                   Zoom="{Binding Zoom}"
+                                   CanvasColor="{Binding BackgroundColor}"
+                                   ShowGrid="{Binding ShowGrid}"
+                                   IsEnabled="{Binding IsEditing}"
+                                   Background="{DynamicResource CanvasBackground}" />
+    </Grid>
+</UserControl>

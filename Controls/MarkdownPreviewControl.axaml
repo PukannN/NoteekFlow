@@ -1,0 +1,20 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="NoteekFlow.Controls.MarkdownPreviewControl"
+             MainTextBrush="{DynamicResource TextPrimary}"
+             CodeBackgroundBrush="{DynamicResource MarkdownCodeBackground}"
+             CodeForegroundBrush="{DynamicResource TextPrimary}"
+             LinkTextBrush="{DynamicResource MarkdownLink}"
+             QuoteBorderBrush="{DynamicResource MarkdownQuote}"
+             DividerBrush="{DynamicResource PanelBorder}"
+             PanelBorderBrush="{DynamicResource PanelBorder}">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto"
+                  Background="{DynamicResource AppBackground}">
+        <StackPanel x:Name="PreviewContent"
+                    MaxWidth="900"
+                    HorizontalAlignment="Left"
+                    Spacing="12"
+                    Margin="48,32" />
+    </ScrollViewer>
+</UserControl>

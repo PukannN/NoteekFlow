@@ -3,6 +3,8 @@
         xmlns:vm="using:NoteekFlow.ViewModels"
         xmlns:models="using:NoteekFlow.Models"
         xmlns:views="using:NoteekFlow.Views"
+        xmlns:controls="using:NoteekFlow.Controls"
+        xmlns:loc="using:NoteekFlow.Resources"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800" 
@@ -11,87 +13,213 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="NoteekFlow"
         Width="1200"
-        Height="800">
+        Height="800"
+        MinWidth="800"
+        MinHeight="520"
+        Background="{DynamicResource AppBackground}">
 
     <Design.DataContext>
         <vm:MainViewModel />
     </Design.DataContext>
 
-
-    <!--DATA TEMPLATES LINK VIEWMODELS TO VIEWS-->
     <Window.DataTemplates>
-        
         <DataTemplate DataType="{x:Type vm:DefaultWorkspaceViewModel}">
             <views:DefaultWorkspaceView/>
         </DataTemplate>
-    
         <DataTemplate DataType="{x:Type vm:ImageViewModel}">
             <views:ImageView />
         </DataTemplate>
-
         <DataTemplate DataType="{x:Type vm:PdfViewModel}">
             <views:PdfView />
         </DataTemplate>
-
+        <DataTemplate DataType="{x:Type vm:MarkdownViewModel}">
+            <views:MarkdownView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:NoteekViewModel}">
+            <views:NoteekView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:TextFileViewModel}">
+            <views:TextFileView />
+        </DataTemplate>
     </Window.DataTemplates>
 
-    <SplitView IsPaneOpen="{Binding IsPaneOpen}" 
-               DisplayMode="CompactInline" 
-               CompactPaneLength="40"
-               OpenPaneLength="220">
-               
-        <SplitView.Pane>
-            <Grid RowDefinitions="Auto, *, Auto" Background="#1E1E1E"> 
-                <Panel Grid.Row="0" Background="#252526">
-                    <StackPanel Margin="5" Spacing="5" Orientation="Horizontal">
-                        <Button Content="☰" Command="{Binding TogglePaneCommand}" Width="30" ToolTip.Tip="Toggle Pane"/>
-                        <Button Content="📁" Command="{Binding OpenDirectoryCommand}" Width="30" ToolTip.Tip="Open Workspace"/>
-                        <Button Content="➕" Command="{Binding CreateFileCommand}" Width="30" ToolTip.Tip="New File"/>
+    <Window.Styles>
+        <Style Selector="Button.toolbar">
+            <Setter Property="Background" Value="{DynamicResource ButtonBackground}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimary}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource PanelBorder}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="12,5" />
+            <Setter Property="CornerRadius" Value="5" />
+        </Style>
+        <Style Selector="Button.toolbar:pointerover">
+            <Setter Property="Background" Value="{DynamicResource ButtonHover}" />
+        </Style>
+        <Style Selector="Button.toolbar.primary">
+            <Setter Property="Background" Value="{DynamicResource AccentBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource AccentBorder}" />
+        </Style>
+        <Style Selector="Button.toolbar.save">
+            <Setter Property="Background" Value="{DynamicResource AccentBackground}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderBrush" Value="{DynamicResource AccentBorder}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Padding" Value="14,3" />
+            <Setter Property="MinWidth" Value="84" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+        <Style Selector="TreeView">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimary}" />
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto,*,Auto" Background="{DynamicResource AppBackground}">
+        <views:NavigationBarView Grid.Row="0" DataContext="{Binding NavigationBar}" />
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding NavigationBar.ExplorerColumnWidth, Mode=TwoWay}"
+                                  MinWidth="{Binding NavigationBar.ExplorerMinimumWidth}" />
+                <ColumnDefinition Width="Auto" MinWidth="0" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0"
+                    MinWidth="0"
+                    Background="{DynamicResource PanelSecondary}"
+                    BorderBrush="{DynamicResource PanelBorder}"
+                    BorderThickness="0,0,1,0">
+                <Grid RowDefinitions="Auto,*">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="14,14,10,10" Spacing="8">
+                        <TextBlock Text="{x:Static loc:Strings.Explorer}"
+                                   Foreground="{DynamicResource TextSecondary}"
+                                   FontSize="11"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding NavigationBar.WorkspaceName}"
+                                   Foreground="{DynamicResource TextPrimary}"
+                                   FontSize="11"
+                                   VerticalAlignment="Center"
+                                   TextTrimming="CharacterEllipsis" />
                     </StackPanel>
-                </Panel>
+                    <TreeView Grid.Row="1"
+                              MinWidth="0"
+                              ItemsSource="{Binding FileExplorer.NavFiles}"
+                              SelectedItem="{Binding FileExplorer.SelectedItem, Mode=TwoWay}"
+                              ToolTip.Tip="{x:Static loc:Strings.ExplorerContextHelp}"
+                              PointerPressed="OnFileExplorerPointerPressed"
+                              Margin="5,0,5,8"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                              Background="Transparent">
+                        <TreeView.ContextMenu>
+                            <ContextMenu x:DataType="vm:MainViewModel"
+                                         Opened="OnFileExplorerContextMenuOpened">
+                                <MenuItem Header="{x:Static loc:Strings.NewMarkdownNote}"
+                                          Command="{Binding FileExplorer.CreateMarkdownNoteCommand}"
+                                          ToolTip.Tip="{x:Static loc:Strings.CreateMarkdownTooltip}" />
+                                <MenuItem Header="{x:Static loc:Strings.NewNoteekNote}"
+                                          Command="{Binding FileExplorer.CreateNoteekNoteCommand}"
+                                          ToolTip.Tip="{x:Static loc:Strings.CreateNoteekTooltip}" />
+                                <MenuItem Header="{x:Static loc:Strings.NewFolder}"
+                                          Command="{Binding FileExplorer.CreateFolderCommand}"
+                                          ToolTip.Tip="{x:Static loc:Strings.CreateFolderTooltip}" />
+                                <Separator IsVisible="{Binding FileExplorer.HasSelectedItem}" />
+                                <MenuItem Header="{x:Static loc:Strings.Rename}"
+                                          Command="{Binding FileExplorer.RenameSelectedCommand}"
+                                          IsVisible="{Binding FileExplorer.HasSelectedItem}"
+                                          ToolTip.Tip="{x:Static loc:Strings.RenameTooltip}" />
+                                <MenuItem Header="{x:Static loc:Strings.Delete}"
+                                          Command="{Binding FileExplorer.DeleteSelectedCommand}"
+                                          IsVisible="{Binding FileExplorer.HasSelectedItem}"
+                                          ToolTip.Tip="{x:Static loc:Strings.DeleteTooltip}" />
+                            </ContextMenu>
+                        </TreeView.ContextMenu>
+                        <TreeView.DataTemplates>
+                            <TreeDataTemplate DataType="{x:Type models:FileSystemItem}" ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <controls:ThumbnailControl DataContext="{Binding}" />
+                                    <TextBlock Text="{Binding Name}"
+                                               Foreground="{DynamicResource TextPrimary}"
+                                               VerticalAlignment="Center"
+                                               FontSize="13" />
+                                </StackPanel>
+                            </TreeDataTemplate>
+                        </TreeView.DataTemplates>
+                    </TreeView>
+                </Grid>
+            </Border>
 
-                <ListBox Grid.Row="1"
-                         ItemsSource="{Binding FileExplorer.NavFiles}"
-                         SelectedItem="{Binding FileExplorer.SelectedFile}"
-                         IsVisible="{Binding IsPaneOpen}"
-                         Background="Transparent"
-                         ScrollViewer.VerticalScrollBarVisibility="Auto"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                
-                <!-- Should look more into this for user control -->
-                    <ListBox.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Copy"/>
-                            <MenuItem Header="Paste"/>
-                        </ContextMenu>
-                    </ListBox.ContextMenu>
-                    
+            <GridSplitter Grid.Column="1"
+                          x:Name="ExplorerSplitter"
+                          Width="5"
+                          MinHeight="0"
+                          ToolTip.Tip="{x:Static loc:Strings.ResizeExplorer}"
+                          Background="{DynamicResource PanelBorder}"
+                          ResizeDirection="Columns"
+                          ResizeBehavior="PreviousAndNext"
+                          MinWidth="5"
+                          IsVisible="{Binding NavigationBar.IsExplorerOpen}" />
+
+            <Grid Grid.Column="2" RowDefinitions="Auto,*" Background="{DynamicResource AppBackground}">
+                <ListBox Grid.Row="0"
+                         ItemsSource="{Binding OpenTabs}"
+                         SelectedItem="{Binding CurrentEditorViewModel, Mode=TwoWay}"
+                         ToolTip.Tip="{x:Static loc:Strings.SelectTab}"
+                         Background="{DynamicResource PanelBackground}"
+                         BorderBrush="{DynamicResource PanelBorder}"
+                         BorderThickness="0,0,0,1"
+                         ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                         ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
                     <ListBox.ItemTemplate>
-                        <DataTemplate DataType="models:FileItem">
-                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-
-                                <TextBlock Text="{Binding Name}" 
-                                           VerticalAlignment="Center" 
-                                           FontSize="13" 
-                                           Foreground="White">
-                                </TextBlock>
-                            </StackPanel>
+                        <DataTemplate DataType="{x:Type vm:FileContentViewModel}">
+                            <controls:FileTabView />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-
-                <Panel Grid.Row="2" Background="#252525">
-                    <StackPanel Margin="5" Spacing="5" Orientation="Horizontal">
-                        <Button Content="⚙️" Width="30" ToolTip.Tip="Settings"/>
-                    </StackPanel>
-                </Panel>
+                <ContentControl Grid.Row="1" Content="{Binding CurrentEditorViewModel}" />
             </Grid>
-        </SplitView.Pane>
+        </Grid>
 
-        <SplitView.Content>
-            <Grid Background="#202020">
-                    <TransitioningContentControl Content="{Binding CurrentEditorViewModel}"/>
+        <Border Grid.Row="2" Background="{DynamicResource PanelRaised}" BorderBrush="{DynamicResource PanelBorder}" BorderThickness="0,1,0,0">
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto" Height="32" Margin="12,0">
+                <TextBlock Text="{Binding StatusText}"
+                           Foreground="{DynamicResource TextSecondary}"
+                           FontSize="11"
+                           VerticalAlignment="Center"
+                           TextTrimming="CharacterEllipsis" />
+                <TextBlock Grid.Column="1"
+                           Text="{Binding FileExplorer.ErrorMessage}"
+                           Foreground="{DynamicResource ErrorForeground}"
+                           FontSize="11"
+                           VerticalAlignment="Center"
+                           Margin="12,0" />
+                <TextBlock Grid.Column="2"
+                           Text="{Binding NavigationBar.ErrorMessage}"
+                           Foreground="{DynamicResource ErrorForeground}"
+                           FontSize="11"
+                           VerticalAlignment="Center"
+                           Margin="12,0" />
+                <TextBlock Grid.Column="3"
+                           Text="{Binding Settings.ErrorMessage}"
+                           Foreground="{DynamicResource ErrorForeground}"
+                           FontSize="11"
+                           VerticalAlignment="Center"
+                           Margin="12,0" />
+                <Button Grid.Column="4"
+                        Content="{x:Static loc:Strings.Save}"
+                        Command="{Binding SaveCurrentFileCommand}"
+                        ToolTip.Tip="{x:Static loc:Strings.SaveTooltip}"
+                        Margin="12,0"
+                        VerticalAlignment="Center"
+                        Classes="toolbar save" />
             </Grid>
-        </SplitView.Content>
-    </SplitView>
+        </Border>
+    </Grid>
 </Window>

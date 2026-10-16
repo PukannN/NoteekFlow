@@ -1,64 +1,33 @@
-
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.IO;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using Avalonia.Controls;
-using Avalonia.Controls.Templates;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using NoteekFlow.Models;
+using NoteekFlow.Resources;
 
 namespace NoteekFlow.ViewModels;
 
-public partial class FileContentViewModel : ObservableObject
+public partial class FileContentViewModel : ViewModelBase
 {
-    [ObservableProperty] 
-    private FileItem? fileItem;
-}
-
-public partial class DefaultWorkspaceViewModel : FileContentViewModel
-{
-
-}
-
-public partial class ImageViewModel : FileContentViewModel
-{
-    [ObservableProperty] 
-    private Bitmap? _imageSource;
-    
     [ObservableProperty]
-    private string? _fileSource;
+    private FileItem? _fileItem;
 
-    public async Task LoadImageAsync(string filePath)
+    [ObservableProperty]
+    private string _title = Strings.WelcomeTitle;
+
+    [ObservableProperty]
+    private bool _isDirty;
+
+    public event EventHandler? CloseRequested;
+
+    protected FileContentViewModel(FileItem? fileItem = null)
     {
-        try
+        FileItem = fileItem;
+        if (fileItem is not null)
         {
-            byte[] fileBytes = await Task.Run(() => File.ReadAllBytes(filePath));
-            await Dispatcher.UIThread.InvokeAsync(() =>
-            {
-                ImageSource?.Dispose();
-
-                using (var memoryStream = new MemoryStream(fileBytes))
-                {
-                    ImageSource = new Bitmap(memoryStream);
-                }
-            });
+            Title = fileItem.Name;
         }
-            catch (Exception ex)
-        {
-            Debug.Print($"Error loading image: {ex.Message}");
-            ImageSource = null;
-        }   
     }
-}
 
-public partial class PdfViewModel : FileContentViewModel
-{
-    [ObservableProperty]
-    private string? _fileSource;
+    [RelayCommand]
+    private void CloseTab() => CloseRequested?.Invoke(this, EventArgs.Empty);
 }

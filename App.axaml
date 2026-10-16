@@ -5,6 +5,32 @@
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="AppBackground">#181A1F</SolidColorBrush>
+            <SolidColorBrush x:Key="PanelBackground">#202328</SolidColorBrush>
+            <SolidColorBrush x:Key="PanelSecondary">#1E2127</SolidColorBrush>
+            <SolidColorBrush x:Key="PanelRaised">#23262D</SolidColorBrush>
+            <SolidColorBrush x:Key="PanelBorder">#34383F</SolidColorBrush>
+            <SolidColorBrush x:Key="ButtonBackground">#292D34</SolidColorBrush>
+            <SolidColorBrush x:Key="ButtonHover">#363B44</SolidColorBrush>
+            <SolidColorBrush x:Key="TextPrimary">#D9DEE7</SolidColorBrush>
+            <SolidColorBrush x:Key="TextSecondary">#8F98A6</SolidColorBrush>
+            <SolidColorBrush x:Key="ErrorForeground">#E59A8A</SolidColorBrush>
+            <SolidColorBrush x:Key="AccentBackground">#315B87</SolidColorBrush>
+            <SolidColorBrush x:Key="AccentBorder">#4778A8</SolidColorBrush>
+            <SolidColorBrush x:Key="CanvasBackground">#FBFAF7</SolidColorBrush>
+            <SolidColorBrush x:Key="CanvasInk">#20242B</SolidColorBrush>
+            <SolidColorBrush x:Key="MarkdownCodeBackground">#22262D</SolidColorBrush>
+            <SolidColorBrush x:Key="MarkdownCodeForeground">#D9DEE7</SolidColorBrush>
+            <SolidColorBrush x:Key="MarkdownLink">#77AADD</SolidColorBrush>
+            <SolidColorBrush x:Key="MarkdownQuote">#527BA5</SolidColorBrush>
+            <SolidColorBrush x:Key="DirtyIndicator">#D6A85F</SolidColorBrush>
+            <SolidColorBrush x:Key="ThumbnailBackground">#30343B</SolidColorBrush>
+            <SolidColorBrush x:Key="ThumbnailForeground">#A9B7C6</SolidColorBrush>
+        </ResourceDictionary>
+    </Application.Resources>
+
     <Application.DataTemplates>
         <local:ViewLocator />
     </Application.DataTemplates>

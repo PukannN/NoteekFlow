@@ -1,0 +1,21 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:NoteekFlow.ViewModels"
+             xmlns:controls="using:NoteekFlow.Controls"
+             xmlns:loc="using:NoteekFlow.Resources"
+             x:Class="NoteekFlow.Controls.FileTabView"
+             x:DataType="vm:FileContentViewModel">
+    <StackPanel Orientation="Horizontal" Spacing="7" VerticalAlignment="Center">
+        <controls:ThumbnailControl DataContext="{Binding FileItem}" />
+        <TextBlock Text="{Binding Title}" VerticalAlignment="Center" />
+        <TextBlock Text="●" Foreground="{DynamicResource DirtyIndicator}" IsVisible="{Binding IsDirty}"
+                   VerticalAlignment="Center" FontSize="8" />
+        <Button Content="×"
+                Command="{Binding CloseTabCommand}"
+                Padding="4,0"
+                MinWidth="22"
+                Height="22"
+                Background="Transparent"
+                ToolTip.Tip="{x:Static loc:Strings.CloseTab}" />
+    </StackPanel>
+</UserControl>

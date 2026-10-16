@@ -9,7 +9,7 @@ public class DirectoryService
 {
 
     public string RootPath {get; private set;} = string.Empty;
-    public ObservableCollection<FileItem> Items { get; } = new();
+    public ObservableCollection<FileSystemItem> Items { get; } = new();
 
     public void LoadDirectory(string directoryPath)
     {
@@ -25,45 +25,40 @@ public class DirectoryService
         }
     } 
 
-    private static List<FileItem> FetchDirectoryItems(string path)
+    private static List<FileSystemItem> FetchDirectoryItems(string path)
     {
-        var items = new List<FileItem>();
+        var items = new List<FileSystemItem>();
 
-        try
-        {
-            var dirInfo = new DirectoryInfo(path);
+        var dirInfo = new DirectoryInfo(path);
 
-            var directories = dirInfo.EnumerateDirectories()
-                .Where(d => !d.Attributes.HasFlag(FileAttributes.Hidden))
-                .OrderBy(d => d.Name)
-                .Select(d =>
-                {
-                   var folderItem = new FileItem(d.FullName, isDirectory: true);
-                   var subItems = FetchDirectoryItems(d.FullName);
-                   foreach (var child in subItems)
-                    {
-                        folderItem.Children.Add(child);
-                    } 
-                    return folderItem;
-                });
-            var files = dirInfo.EnumerateFiles()
-                .Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden))
-                .OrderBy(f => f.Name)                
-                .Select(f => new FileItem(f.FullName, isDirectory: false));
-            
-            items.AddRange(directories);
-            items.AddRange(files);
-        }
-        catch(UnauthorizedAccessException)
-        {
+        var directories = dirInfo.EnumerateDirectories()
+            .Where(d => !d.Attributes.HasFlag(FileAttributes.Hidden))
+            .OrderBy(d => d.Name)
+            .Select(d => LoadDirectoryItem(d));
+        var files = dirInfo.EnumerateFiles()
+            .Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden))
+            .OrderBy(f => f.Name)
+            .Select(f => new FileItem(f.FullName));
 
-        }
-        catch (Exception)
-        {
-            
-        }
+        items.AddRange(directories);
+        items.AddRange(files);
 
         return items;
     }
 
+    private static DirectoryItem LoadDirectoryItem(DirectoryInfo directory)
+    {
+        var item = new DirectoryItem(directory.FullName);
+        if (directory.Attributes.HasFlag(FileAttributes.ReparsePoint))
+        {
+            return item;
+        }
+
+        foreach (var child in FetchDirectoryItems(directory.FullName))
+        {
+            item.Children.Add(child);
+        }
+
+        return item;
+    }
 }

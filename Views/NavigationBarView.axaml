@@ -1,0 +1,79 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:NoteekFlow.ViewModels"
+             xmlns:loc="using:NoteekFlow.Resources"
+             x:Class="NoteekFlow.Views.NavigationBarView"
+             x:DataType="vm:NavigationBarViewModel">
+    <Border Background="{DynamicResource PanelBackground}" BorderBrush="{DynamicResource PanelBorder}" BorderThickness="0,0,0,1">
+        <Grid ColumnDefinitions="Auto,Auto,*,Auto,Auto,Auto" Height="48" Margin="12,0">
+            <Button Grid.Column="0"
+                    Content="☰"
+                    Command="{Binding ToggleExplorerCommand}"
+                    ToolTip.Tip="{x:Static loc:Strings.ToggleExplorer}"
+                    Classes="toolbar" />
+            <TextBlock Grid.Column="1"
+                       Text="{Binding WorkspaceName}"
+                       Margin="12,0"
+                       VerticalAlignment="Center"
+                       Foreground="{DynamicResource TextPrimary}"
+                       FontWeight="SemiBold" />
+            <TextBlock Grid.Column="2"
+                       Text="NoteekFlow"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Foreground="{DynamicResource TextSecondary}"
+                       FontSize="12" />
+            <Button Grid.Column="3"
+                    Content="{x:Static loc:Strings.CreateNote}"
+                    Command="{Binding CreateNoteCommand}"
+                    ToolTip.Tip="{x:Static loc:Strings.CreateNoteTooltip}"
+                    Classes="toolbar primary" />
+            <Button Grid.Column="4"
+                    Content="{x:Static loc:Strings.OpenWorkspace}"
+                    Command="{Binding OpenWorkspaceCommand}"
+                    ToolTip.Tip="{x:Static loc:Strings.OpenWorkspaceTooltip}"
+                    Margin="8,0,0,0"
+                    Classes="toolbar" />
+            <Button Grid.Column="5"
+                    Content="⚙"
+                    ToolTip.Tip="{x:Static loc:Strings.Settings}"
+                    Margin="8,0,0,0"
+                    Classes="toolbar">
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuItem Header="{x:Static loc:Strings.ThemeSettings}">
+                            <MenuItem Header="{x:Static loc:Strings.ThemeSystem}"
+                                      Command="{Binding Settings.UseSystemThemeCommand}" />
+                            <MenuItem Header="{x:Static loc:Strings.ThemeDark}"
+                                      Command="{Binding Settings.UseDarkThemeCommand}" />
+                            <MenuItem Header="{x:Static loc:Strings.ThemeLight}"
+                                      Command="{Binding Settings.UseLightThemeCommand}" />
+                        </MenuItem>
+                        <MenuItem Header="{x:Static loc:Strings.AccentColor}">
+                            <MenuItem Header="{x:Static loc:Strings.AccentBlue}"
+                                      Command="{Binding Settings.UseBlueAccentCommand}" />
+                            <MenuItem Header="{x:Static loc:Strings.AccentGreen}"
+                                      Command="{Binding Settings.UseGreenAccentCommand}" />
+                            <MenuItem Header="{x:Static loc:Strings.AccentPurple}"
+                                      Command="{Binding Settings.UsePurpleAccentCommand}" />
+                        </MenuItem>
+                        <MenuItem Header="{x:Static loc:Strings.ExplorerWidth}">
+                            <MenuItem Header="{x:Static loc:Strings.ExplorerCompact}"
+                                      Command="{Binding Settings.SetCompactExplorerCommand}" />
+                            <MenuItem Header="{x:Static loc:Strings.ExplorerStandard}"
+                                      Command="{Binding Settings.SetStandardExplorerCommand}" />
+                            <MenuItem Header="{x:Static loc:Strings.ExplorerWide}"
+                                      Command="{Binding Settings.SetWideExplorerCommand}" />
+                        </MenuItem>
+                        <MenuItem Header="{x:Static loc:Strings.Language}">
+                            <MenuItem Header="{x:Static loc:Strings.LanguageEnglish}"
+                                      Command="{Binding Settings.UseEnglishCommand}" />
+                            <MenuItem Header="{x:Static loc:Strings.LanguageCzech}"
+                                      Command="{Binding Settings.UseCzechCommand}" />
+                        </MenuItem>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

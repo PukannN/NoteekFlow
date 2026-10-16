@@ -1,41 +1,28 @@
-using System;
-using System.Collections.ObjectModel;
 using System.IO;
-
 
 namespace NoteekFlow.Models;
 
-public class FileItem
+public sealed class FileItem : FileSystemItem
 {
-    public string Name {get; private set;} = string.Empty;
-    public string FullPath {get; private set;} = string.Empty;
-    public bool IsDirectory {get; private set;}
-    public ObservableCollection<FileItem> Children = new();
-
-    public FileItemType Type => IsDirectory
-        ? FileItemType.FOLDER
-        : Path.GetExtension(FullPath).ToLowerInvariant() switch
-        {
-            ".noteek" => FileItemType.NOTEEK,
-            ".md" => FileItemType.MARKDOWN,
-            ".png" or ".jpeg" or ".jpg" => FileItemType.IMAGE,
-            ".pdf" => FileItemType.PDF,
-            ".txt" => FileItemType.TEXT,
-            _ => FileItemType.UNKNOWN
-        };
-
-    public FileItem(){}
-
-    public FileItem(string path, bool isDirectory)
+    public FileItemType Type => Path.GetExtension(FullPath).ToLowerInvariant() switch
     {
-        FullPath = path;
-        IsDirectory = isDirectory;
-        Name = Path.GetFileName(path);
-        if (string.IsNullOrEmpty(Name))
-        {
-            Name = path;
-        }
-        
-    }
+        ".noteek" => FileItemType.NOTEEK,
+        ".md" => FileItemType.MARKDOWN,
+        ".png" or ".jpeg" or ".jpg" or ".gif" or ".bmp" or ".webp" => FileItemType.IMAGE,
+        ".pdf" => FileItemType.PDF,
+        ".txt" => FileItemType.TEXT,
+        _ => FileItemType.UNKNOWN
+    };
 
+    public override string Icon => Type switch
+    {
+        FileItemType.MARKDOWN => "M",
+        FileItemType.NOTEEK => "N",
+        FileItemType.IMAGE => "▧",
+        FileItemType.PDF => "P",
+        FileItemType.TEXT => "T",
+        _ => "·"
+    };
+
+    public FileItem(string path) : base(path) { }
 }

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="WelcomeTitle" xml:space="preserve"><value>NoteekFlow</value></data>
+  <data name="SelectFile" xml:space="preserve"><value>Vyberte soubor v průzkumníku a začněte upravovat.</value></data>
+  <data name="UnsupportedFile" xml:space="preserve"><value>Náhled tohoto typu souboru zatím není k dispozici.</value></data>
+  <data name="Explorer" xml:space="preserve"><value>PRŮZKUMNÍK</value></data>
+  <data name="Edit" xml:space="preserve"><value>Upravit</value></data>
+  <data name="Preview" xml:space="preserve"><value>Náhled</value></data>
+  <data name="OpenWorkspace" xml:space="preserve"><value>Otevřít pracovní prostor</value></data>
+  <data name="CreateNote" xml:space="preserve"><value>＋ Poznámka</value></data>
+  <data name="CreateNoteTooltip" xml:space="preserve"><value>Vytvořit poznámku Markdown nebo Noteek</value></data>
+  <data name="ToggleExplorer" xml:space="preserve"><value>Zobrazit nebo skrýt průzkumník souborů</value></data>
+  <data name="Save" xml:space="preserve"><value>Uložit</value></data>
+  <data name="CloseTab" xml:space="preserve"><value>Zavřít kartu</value></data>
+  <data name="PdfPreview" xml:space="preserve"><value>Náhled PDF</value></data>
+  <data name="ZoomIn" xml:space="preserve"><value>Přiblížit</value></data>
+  <data name="ZoomOut" xml:space="preserve"><value>Oddálit</value></data>
+  <data name="ResetZoom" xml:space="preserve"><value>Obnovit přiblížení</value></data>
+  <data name="PdfRenderError" xml:space="preserve"><value>PDF se nepodařilo vykreslit: {0}</value></data>
+  <data name="NoWorkspace" xml:space="preserve"><value>Žádný pracovní prostor</value></data>
+  <data name="Ready" xml:space="preserve"><value>Připraveno</value></data>
+  <data name="WorkspaceStatus" xml:space="preserve"><value>Pracovní prostor: {0}</value></data>
+  <data name="MissingWorkspace" xml:space="preserve"><value>Složka pracovního prostoru neexistuje: {0}</value></data>
+  <data name="LoadWorkspaceError" xml:space="preserve"><value>Pracovní prostor se nepodařilo načíst: {0}</value></data>
+  <data name="FolderAccessUnavailable" xml:space="preserve"><value>Přístup ke složkám není dostupný.</value></data>
+  <data name="FileAccessUnavailable" xml:space="preserve"><value>Přístup k souborům není dostupný.</value></data>
+  <data name="OpenFolderDialogError" xml:space="preserve"><value>Dialog pro výběr složky nelze otevřít: {0}</value></data>
+  <data name="LocalWorkspaceRequired" xml:space="preserve"><value>Vybraný pracovní prostor není dostupný jako místní složka.</value></data>
+  <data name="SaveDialogError" xml:space="preserve"><value>Dialog pro uložení nelze otevřít: {0}</value></data>
+  <data name="CreateNoteError" xml:space="preserve"><value>Poznámku se nepodařilo vytvořit: {0}</value></data>
+  <data name="ReadFileError" xml:space="preserve"><value>Soubor nelze přečíst: {0}</value></data>
+  <data name="SaveFileError" xml:space="preserve"><value>Soubor nelze uložit: {0}</value></data>
+  <data name="SaveBeforeClose" xml:space="preserve"><value>Před zavřením karty uložte změny.</value></data>
+  <data name="CannotSaveActiveFile" xml:space="preserve"><value>Aktivní kartu nelze uložit jako text.</value></data>
+  <data name="SaveFailed" xml:space="preserve"><value>Uložení se nezdařilo.</value></data>
+  <data name="Saved" xml:space="preserve"><value>Uloženo</value></data>
+  <data name="PageCounter" xml:space="preserve"><value>Stránka {0} z {1}</value></data>
+  <data name="PreviousPage" xml:space="preserve"><value>Předchozí stránka</value></data>
+  <data name="NextPage" xml:space="preserve"><value>Další stránka</value></data>
+  <data name="ClearCanvas" xml:space="preserve"><value>Vymazat plátno</value></data>
+  <data name="CanvasHint" xml:space="preserve"><value>Kreslete stylusem, perem nebo myší.</value></data>
+  <data name="WorkspacePickerTitle" xml:space="preserve"><value>Otevřít pracovní prostor</value></data>
+  <data name="NoteFileType" xml:space="preserve"><value>Poznámky Noteek</value></data>
+  <data name="CreateNoteDialogTitle" xml:space="preserve"><value>Vytvořit poznámku</value></data>
+  <data name="NewNoteFileName" xml:space="preserve"><value>Nová poznámka.md</value></data>
+  <data name="ImageLoadError" xml:space="preserve"><value>Obrázek nelze načíst: {0}</value></data>
+  <data name="NewMarkdownContent" xml:space="preserve"><value># Nová poznámka&#10;</value></data>
+  <data name="PdfPlatformUnsupported" xml:space="preserve"><value>Náhled PDF není na této platformě podporován.</value></data>
+  <data name="OpenFileError" xml:space="preserve"><value>Soubor '{0}' nelze otevřít: {1}</value></data>
+  <data name="LegacyNoteRecovered" xml:space="preserve"><value>Tato prázdná poznámka byla vytvořena ve starším neplatném formátu. Uložte ji a převede se do aktuálního formátu.</value></data>
+  <data name="Settings" xml:space="preserve"><value>Nastavení</value></data>
+  <data name="ThemeSystem" xml:space="preserve"><value>Systémový motiv</value></data>
+  <data name="ThemeDark" xml:space="preserve"><value>Tmavý motiv</value></data>
+  <data name="ThemeLight" xml:space="preserve"><value>Světlý motiv</value></data>
+  <data name="LoadSettingsError" xml:space="preserve"><value>Nastavení nelze načíst: {0}</value></data>
+  <data name="SaveSettingsError" xml:space="preserve"><value>Nastavení nelze uložit: {0}</value></data>
+  <data name="ExplorerContextHelp" xml:space="preserve"><value>Akce se zobrazí po kliknutí pravým tlačítkem na položku.</value></data>
+  <data name="ResizeExplorer" xml:space="preserve"><value>Přetažením změníte šířku průzkumníku</value></data>
+  <data name="SelectTab" xml:space="preserve"><value>Vybrat otevřený soubor</value></data>
+  <data name="NewMarkdownNote" xml:space="preserve"><value>Nová poznámka Markdown</value></data>
+  <data name="NewNoteekNote" xml:space="preserve"><value>Nové kreslicí plátno Noteek</value></data>
+  <data name="NewFolder" xml:space="preserve"><value>Nová složka</value></data>
+  <data name="Rename" xml:space="preserve"><value>Přejmenovat</value></data>
+  <data name="Delete" xml:space="preserve"><value>Smazat</value></data>
+  <data name="DeleteConfirm" xml:space="preserve"><value>Smazat „{0}“? Tuto akci nelze vrátit.</value></data>
+  <data name="EnterName" xml:space="preserve"><value>Zadejte název:</value></data>
+  <data name="CreateItemError" xml:space="preserve"><value>Položku nelze vytvořit: {0}</value></data>
+  <data name="RenameItemError" xml:space="preserve"><value>Položku nelze přejmenovat: {0}</value></data>
+  <data name="DeleteItemError" xml:space="preserve"><value>Položku nelze smazat: {0}</value></data>
+  <data name="InvalidItemName" xml:space="preserve"><value>Zadejte platný název bez oddělovačů cest.</value></data>
+  <data name="ItemAlreadyExists" xml:space="preserve"><value>Položka s tímto názvem již existuje.</value></data>
+  <data name="CannotDeleteDirtyFile" xml:space="preserve"><value>Před smazáním uložte nebo zavřete otevřené změněné soubory.</value></data>
+  <data name="CreateMarkdownTooltip" xml:space="preserve"><value>Vytvořit zde poznámku Markdown</value></data>
+  <data name="CreateNoteekTooltip" xml:space="preserve"><value>Vytvořit zde kresbu Noteek</value></data>
+  <data name="CreateFolderTooltip" xml:space="preserve"><value>Vytvořit zde složku</value></data>
+  <data name="RenameTooltip" xml:space="preserve"><value>Přejmenovat vybranou položku</value></data>
+  <data name="DeleteTooltip" xml:space="preserve"><value>Smazat vybranou položku</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Zrušit</value></data>
+  <data name="Confirm" xml:space="preserve"><value>Potvrdit</value></data>
+  <data name="SaveTooltip" xml:space="preserve"><value>Uložit aktivní poznámku</value></data>
+  <data name="MarkdownEditTooltip" xml:space="preserve"><value>Upravit zdrojový text Markdown</value></data>
+  <data name="MarkdownPreviewTooltip" xml:space="preserve"><value>Zobrazit formátovaný náhled Markdown</value></data>
+  <data name="CanvasEditTooltip" xml:space="preserve"><value>Kreslit na plátno perem, stylusem nebo myší</value></data>
+  <data name="CanvasPreviewTooltip" xml:space="preserve"><value>Zobrazit plátno bez možnosti kreslení</value></data>
+  <data name="OpenWorkspaceTooltip" xml:space="preserve"><value>Vybrat složku pracovního prostoru</value></data>
+  <data name="RenameFormatError" xml:space="preserve"><value>Pro zachování formátu ponechte původní příponu souboru {0}.</value></data>
+  <data name="RenameNoFormatError" xml:space="preserve"><value>Tento soubor nemá příponu; při přejmenování mu nelze přidat formát souboru.</value></data>
+  <data name="ThemeSettings" xml:space="preserve"><value>Motiv</value></data>
+  <data name="PenTool" xml:space="preserve"><value>Pero</value></data>
+  <data name="RectangleTool" xml:space="preserve"><value>Obdélník</value></data>
+  <data name="EllipseTool" xml:space="preserve"><value>Elipsa</value></data>
+  <data name="LineTool" xml:space="preserve"><value>Čára</value></data>
+  <data name="TextTool" xml:space="preserve"><value>Text</value></data>
+  <data name="EraserTool" xml:space="preserve"><value>Guma</value></data>
+  <data name="EnterCanvasText" xml:space="preserve"><value>Text k vložení na plátno:</value></data>
+  <data name="AccentColor" xml:space="preserve"><value>Barva zvýraznění</value></data>
+  <data name="AccentBlue" xml:space="preserve"><value>Modrá</value></data>
+  <data name="AccentGreen" xml:space="preserve"><value>Zelená</value></data>
+  <data name="AccentPurple" xml:space="preserve"><value>Fialová</value></data>
+  <data name="ExplorerWidth" xml:space="preserve"><value>Šířka průzkumníku</value></data>
+  <data name="ExplorerCompact" xml:space="preserve"><value>Kompaktní</value></data>
+  <data name="ExplorerStandard" xml:space="preserve"><value>Standardní</value></data>
+  <data name="ExplorerWide" xml:space="preserve"><value>Široká</value></data>
+  <data name="InkDark" xml:space="preserve"><value>Tmavý inkoust</value></data>
+  <data name="InkRed" xml:space="preserve"><value>Červený inkoust</value></data>
+  <data name="InkBlue" xml:space="preserve"><value>Modrý inkoust</value></data>
+  <data name="InkGreen" xml:space="preserve"><value>Zelený inkoust</value></data>
+  <data name="Language" xml:space="preserve"><value>Jazyk</value></data>
+  <data name="LanguageEnglish" xml:space="preserve"><value>Angličtina</value></data>
+  <data name="LanguageCzech" xml:space="preserve"><value>Čeština</value></data>
+  <data name="Grid" xml:space="preserve"><value>Mřížka</value></data>
+  <data name="StrokeWidth" xml:space="preserve"><value>Šířka</value></data>
+  <data name="BackgroundLight" xml:space="preserve"><value>Teplé pozadí</value></data>
+  <data name="BackgroundWhite" xml:space="preserve"><value>Bílé pozadí</value></data>
+  <data name="BackgroundDark" xml:space="preserve"><value>Tmavé pozadí</value></data>
+</root>

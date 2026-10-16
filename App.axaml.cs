@@ -1,8 +1,11 @@
+using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using NoteekFlow.ViewModels;
 using NoteekFlow.Views;
+using NoteekFlow.Models;
+using NoteekFlow.Resources;
 
 namespace NoteekFlow;
 
@@ -17,10 +20,16 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow
+            try
             {
-                DataContext = new MainViewModel(),
-            };
+                LanguageService.Apply(new UserPreferencesStore().Load().Language);
+            }
+            catch (Exception ex) when (UserPreferencesStore.IsRecoverableLoadError(ex))
+            {
+                LanguageService.Apply("en");
+            }
+
+            desktop.MainWindow = new MainWindow();
         }
 
         base.OnFrameworkInitializationCompleted();

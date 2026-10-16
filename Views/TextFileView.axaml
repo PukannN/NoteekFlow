@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:NoteekFlow.ViewModels"
+             x:DataType="vm:TextFileViewModel"
+             x:Class="NoteekFlow.Views.TextFileView">
+    <Grid RowDefinitions="Auto,*" Background="{DynamicResource AppBackground}">
+        <Border Grid.Row="0"
+                Background="{DynamicResource PanelBackground}"
+                BorderBrush="{DynamicResource PanelBorder}"
+                BorderThickness="0,0,0,1"
+                Padding="18,10">
+            <TextBlock Text="{Binding ErrorMessage}"
+                       Foreground="{DynamicResource ErrorForeground}" />
+        </Border>
+        <TextBox Grid.Row="1"
+                 Text="{Binding Content, Mode=TwoWay}"
+                 AcceptsReturn="True"
+                 AcceptsTab="True"
+                 TextWrapping="Wrap"
+                 VerticalContentAlignment="Stretch"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 Padding="48,34"
+                 FontFamily="Consolas"
+                 FontSize="{Binding EditorFontSize}"
+                 Foreground="{DynamicResource TextPrimary}"
+                 Background="Transparent"
+                 BorderThickness="0"
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:models="using:NoteekFlow.Models"
+             x:Class="NoteekFlow.Controls.ThumbnailControl"
+             x:DataType="models:FileSystemItem">
+    <Border Width="20" Height="20"
+            CornerRadius="4"
+            Background="{DynamicResource ThumbnailBackground}"
+            VerticalAlignment="Center">
+        <TextBlock Text="{Binding Icon}"
+                   Foreground="{DynamicResource ThumbnailForeground}"
+                   FontSize="11"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+    </Border>
+</UserControl>
