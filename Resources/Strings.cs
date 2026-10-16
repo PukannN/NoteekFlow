@@ -112,4 +112,5 @@ public static class Strings
     public static string ZoomIn => Get(nameof(ZoomIn));
     public static string ZoomOut => Get(nameof(ZoomOut));
     public static string ResetZoom => Get(nameof(ResetZoom));
+    public static string ConfirmCanvasClear => Get(nameof(ConfirmCanvasClear));
 }

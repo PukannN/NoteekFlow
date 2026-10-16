@@ -170,7 +170,7 @@
                          Background="{DynamicResource PanelBackground}"
                          BorderBrush="{DynamicResource PanelBorder}"
                          BorderThickness="0,0,0,1"
-                         ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                         ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                          ScrollViewer.VerticalScrollBarVisibility="Disabled">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
