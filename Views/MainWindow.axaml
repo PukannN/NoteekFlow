@@ -151,6 +151,7 @@
                 </Grid>
             </Border>
 
+<<<<<<< HEAD
             <GridSplitter Grid.Column="1"
                           x:Name="ExplorerSplitter"
                           Width="5"
@@ -177,6 +178,26 @@
                             <StackPanel Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
+=======
+                <ListBox Grid.Row="1"
+                         ItemsSource="{Binding FileExplorer.NavFiles}"
+                         SelectedItem="{Binding FileExplorer.SelectedFile}"
+                         IsVisible="{Binding IsPaneOpen}"
+                         Background="Transparent"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         ToolTip.Tip="Click to view"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                
+                <!-- Should look more into this for user control -->
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Copy"/>
+                            <MenuItem Header="Paste"/>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                    
+>>>>>>> 3db8f4f13ae14b245584c59a59b397a2ce9828af
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type vm:FileContentViewModel}">
                             <controls:FileTabView />
