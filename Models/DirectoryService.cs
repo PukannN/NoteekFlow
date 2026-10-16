@@ -9,8 +9,7 @@ public class DirectoryService
 {
 
     public string RootPath {get; private set;} = string.Empty;
-<<<<<<< HEAD
-    public ObservableCollection<FileSystemItem> Items { get; } = new();
+    public ObservableCollection<FileSystemItem> Items { get; set; } = new();
 
 =======
     public ObservableCollection<FileItem> Items { get;set;} = new();
