@@ -19,7 +19,7 @@
         Background="{DynamicResource AppBackground}">
         
     <Design.DataContext>
-        <vm:MainViewModel />
+        <vm:MainViewModel/>
     </Design.DataContext>
 
     <Window.DataTemplates>

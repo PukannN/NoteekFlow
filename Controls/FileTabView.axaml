@@ -5,16 +5,21 @@
              xmlns:loc="using:NoteekFlow.Resources"
              x:Class="NoteekFlow.Controls.FileTabView"
              x:DataType="vm:FileContentViewModel">
-    <StackPanel Orientation="Horizontal" Spacing="7" VerticalAlignment="Center">
+    <StackPanel Orientation="Horizontal" Spacing="5" MaxHeight="16" VerticalAlignment="Center">
         <controls:ThumbnailControl DataContext="{Binding FileItem}" />
-        <TextBlock Text="{Binding Title}" VerticalAlignment="Center" />
-        <TextBlock Text="●" Foreground="{DynamicResource DirtyIndicator}" IsVisible="{Binding IsDirty}"
-                   VerticalAlignment="Center" FontSize="8" />
+        <TextBlock Text="{Binding Title}"
+                   VerticalAlignment="Center" />
+        <TextBlock Text="●" 
+                   Foreground="{DynamicResource DirtyIndicator}" 
+                   IsVisible="{Binding IsDirty}"
+                   VerticalAlignment="Center" 
+                   FontSize="8" />
         <Button Content="×"
+                CornerRadius="10"
                 Command="{Binding CloseTabCommand}"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
                 Padding="4,0"
-                MinWidth="22"
-                Height="22"
                 Background="Transparent"
                 ToolTip.Tip="{x:Static loc:Strings.CloseTab}" />
     </StackPanel>
