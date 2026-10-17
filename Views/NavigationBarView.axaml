@@ -17,16 +17,11 @@
                        VerticalAlignment="Center"
                        Foreground="{DynamicResource TextPrimary}"
                        FontWeight="SemiBold" />
-            <TextBlock Grid.Column="2"
-                       Text="NoteekFlow"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       Foreground="{DynamicResource TextSecondary}"
-                       FontSize="12" />
             <Button Grid.Column="3"
                     Content="{x:Static loc:Strings.CreateNote}"
                     Command="{Binding CreateNoteCommand}"
                     ToolTip.Tip="{x:Static loc:Strings.CreateNoteTooltip}"
+                    Margin="8,0,0,0"
                     Classes="toolbar primary" />
             <Button Grid.Column="4"
                     Content="{x:Static loc:Strings.OpenWorkspace}"
