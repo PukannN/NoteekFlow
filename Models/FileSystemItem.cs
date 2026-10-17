@@ -1,5 +1,8 @@
-using System.Collections.ObjectModel;
+using System;
 using System.IO;
+using System.Collections.ObjectModel;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 
 namespace NoteekFlow.Models;
 
@@ -9,7 +12,7 @@ public abstract class FileSystemItem
     public string FullPath { get; }
     public virtual bool IsDirectory => false;
     public ObservableCollection<FileSystemItem> Children { get; } = new();
-    public abstract string Icon { get; }
+    public abstract Bitmap Icon { get; }
 
     protected FileSystemItem(string path)
     {
@@ -19,5 +22,10 @@ public abstract class FileSystemItem
         {
             Name = path;
         }
+    }
+
+    protected Bitmap getItemIcon(string iconName)
+    {   
+        return new Bitmap(AssetLoader.Open(new Uri($"avares://NoteekFlow/Assets/FileIcons/{iconName}")));
     }
 }

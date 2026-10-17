@@ -6,45 +6,46 @@
              x:Class="NoteekFlow.Views.PdfView">
     <Grid RowDefinitions="Auto,*" Background="{DynamicResource AppBackground}">
         <Border Grid.Row="0" Background="{DynamicResource PanelBackground}" BorderBrush="{DynamicResource PanelBorder}" BorderThickness="0,0,0,1">
-            <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto,Auto" Height="42" Margin="12,0">
-                <Button Content="‹"
+            <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*,Auto,Auto" Height="42" Margin="12,0">
+                <Button Grid.Column="1"
+                        Content="‹"
                         Command="{Binding PreviousPageCommand}"
                         ToolTip.Tip="{x:Static loc:Strings.PreviousPage}"
                         IsEnabled="{Binding CanGoToPreviousPage}" />
-                <TextBlock Grid.Column="1"
+                <Button Grid.Column="2"
+                        Content="›"
+                        Command="{Binding NextPageCommand}"
+                        IsEnabled="{Binding CanGoToNextPage}"
+                        ToolTip.Tip="{x:Static loc:Strings.NextPage}" />
+                <TextBlock Grid.Column="3"
                            Text="{Binding PageInfo}"
                            Foreground="{DynamicResource TextPrimary}"
                            VerticalAlignment="Center"
                            Margin="10,0" />
-                <Button Grid.Column="2"
+                <Button Grid.Column="4"
                         Content="−"
                         Command="{Binding ZoomOutCommand}"
                         ToolTip.Tip="{x:Static loc:Strings.ZoomOut}"
                         Margin="8,0,2,0" />
-                <Button Grid.Column="3"
+                <Button Grid.Column="5"
                         Content="{Binding ZoomLabel}"
                         Command="{Binding ResetZoomCommand}"
                         ToolTip.Tip="{x:Static loc:Strings.ResetZoom}" />
-                <Button Grid.Column="4"
+                <Button Grid.Column="6"
                         Content="+"
                         Command="{Binding ZoomInCommand}"
                         ToolTip.Tip="{x:Static loc:Strings.ZoomIn}"
                         Margin="2,0,8,0" />
-                <TextBlock Grid.Column="5"
+                <TextBlock Grid.Column="7"
                            Text="{Binding ErrorMessage}"
                            Foreground="{DynamicResource ErrorForeground}"
                            VerticalAlignment="Center" />
-                <TextBlock Grid.Column="6"
+                <TextBlock Grid.Column="8"
                            Text="{x:Static loc:Strings.PdfPreview}"
                            Foreground="{DynamicResource TextSecondary}"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
                            Margin="8,0" />
-                <Button Grid.Column="7"
-                        Content="›"
-                        Command="{Binding NextPageCommand}"
-                        IsEnabled="{Binding CanGoToNextPage}"
-                        ToolTip.Tip="{x:Static loc:Strings.NextPage}" />
             </Grid>
         </Border>
         <ScrollViewer Grid.Row="1"

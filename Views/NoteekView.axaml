@@ -65,8 +65,8 @@
                         <Button Content="+" Command="{Binding IncreaseStrokeWidthCommand}" Classes="toolbar" ToolTip.Tip="{x:Static loc:Strings.StrokeWidth}" />
                         <Border Width="1" Margin="3,2" Background="{DynamicResource PanelBorder}" />
                         <Button Background="#FBFAF7" Width="22" Height="24" Command="{Binding SetBackgroundColorCommand}" CommandParameter="#FBFAF7" ToolTip.Tip="{x:Static loc:Strings.BackgroundLight}" />
-                        <Button Background="#FFFFFF" Width="22" Height="24" Command="{Binding SetBackgroundColorCommand}" CommandParameter="#FFFFFF" ToolTip.Tip="{x:Static loc:Strings.BackgroundWhite}" />
-                        <Button Background="#20242B" Width="22" Height="24" Command="{Binding SetBackgroundColorCommand}" CommandParameter="#20242B" ToolTip.Tip="{x:Static loc:Strings.BackgroundDark}" />
+                        <Button Background="#FFCBDDE9" Width="22" Height="24" Command="{Binding SetBackgroundColorCommand}" CommandParameter="#FFCBDDE9" ToolTip.Tip="{x:Static loc:Strings.BackgroundWhite}" />
+                        <Button Background="#CCC9BA" Width="22" Height="24" Command="{Binding SetBackgroundColorCommand}" CommandParameter="#CCC9BA" ToolTip.Tip="{x:Static loc:Strings.BackgroundDark}" />
                         <ToggleButton Content="{x:Static loc:Strings.Grid}" IsChecked="{Binding ShowGrid}" Classes="toolbar" ToolTip.Tip="{x:Static loc:Strings.Grid}" />
                         <Button Content="{x:Static loc:Strings.ClearCanvas}" Command="{Binding ClearCanvasCommand}" IsEnabled="{Binding IsEditing}" Classes="toolbar" ToolTip.Tip="{x:Static loc:Strings.ClearCanvas}" Margin="4,0,0,0" />
                     </StackPanel>

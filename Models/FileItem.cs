@@ -1,4 +1,6 @@
 using System.IO;
+using Avalonia.Media.Imaging;
+
 
 namespace NoteekFlow.Models;
 
@@ -14,14 +16,14 @@ public sealed class FileItem : FileSystemItem
         _ => FileItemType.UNKNOWN
     };
 
-    public override string Icon => Type switch
+    public override Bitmap Icon => Type switch
     {
-        FileItemType.MARKDOWN => "M",
-        FileItemType.NOTEEK => "N",
-        FileItemType.IMAGE => "▧",
-        FileItemType.PDF => "P",
-        FileItemType.TEXT => "T",
-        _ => "·"
+        FileItemType.MARKDOWN => getItemIcon("mdIcon.png"),
+        FileItemType.NOTEEK => getItemIcon("unknownIcon.png"),
+        FileItemType.IMAGE => getItemIcon("imageIcon.png"),
+        FileItemType.PDF => getItemIcon("pdfIcon.png"),
+        FileItemType.TEXT => getItemIcon("txtIcon.png"),
+        _ => getItemIcon("unknownIcon.png"),
     };
 
     public FileItem(string path) : base(path) { }
