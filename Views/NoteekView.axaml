@@ -5,8 +5,12 @@
              xmlns:controls="using:NoteekFlow.Controls"
              x:Class="NoteekFlow.Views.NoteekView"
              x:DataType="vm:NoteekViewModel">
-    <Grid RowDefinitions="Auto,*" Background="{DynamicResource AppBackground}">
-        <Border Grid.Row="0" Background="{DynamicResource PanelBackground}" BorderBrush="{DynamicResource PanelBorder}" BorderThickness="0,0,0,1">
+    <Grid RowDefinitions="Auto, *" Background="{DynamicResource AppBackground}">
+        <Border Grid.Row="0" 
+                     Background="{DynamicResource PanelBackground}" 
+                     BorderBrush="{DynamicResource PanelBorder}" 
+                     BorderThickness="0,0,0,1"
+                     ZIndex="2">
             <Grid RowDefinitions="Auto,Auto" Margin="12,5">
                 <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto">
                     <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
@@ -74,15 +78,16 @@
             </Grid>
         </Border>
         <controls:InkCanvasControl Grid.Row="1"
-                                   x:Name="InkCanvas"
-                                   Strokes="{Binding Strokes}"
-                                   Tool="{Binding CurrentTool}"
-                                   StrokeColor="{Binding StrokeColor}"
-                                   StrokeWidth="{Binding StrokeWidth}"
-                                   Zoom="{Binding Zoom}"
-                                   CanvasColor="{Binding BackgroundColor}"
-                                   ShowGrid="{Binding ShowGrid}"
-                                   IsEnabled="{Binding IsEditing}"
-                                   Background="{DynamicResource CanvasBackground}" />
+                                        x:Name="InkCanvas"
+                                        Strokes="{Binding Strokes}"
+                                        Tool="{Binding CurrentTool}"
+                                        StrokeColor="{Binding StrokeColor}"
+                                        StrokeWidth="{Binding StrokeWidth}"
+                                        Zoom="{Binding Zoom}"
+                                        CanvasColor="{Binding BackgroundColor}"
+                                        ShowGrid="{Binding ShowGrid}"
+                                        IsEnabled="{Binding IsEditing}"
+                                        Background="{DynamicResource CanvasBackground}"
+                                        ZIndex="1" />
     </Grid>
 </UserControl>

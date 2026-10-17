@@ -5,10 +5,16 @@
              xmlns:controls="using:NoteekFlow.Controls"
              x:Class="NoteekFlow.Views.MarkdownView"
              x:DataType="vm:MarkdownViewModel">
-    <Grid RowDefinitions="Auto,*" Background="{DynamicResource AppBackground}">
-        <Border Grid.Row="0" Background="{DynamicResource PanelBackground}" BorderBrush="{DynamicResource PanelBorder}" BorderThickness="0,0,0,1">
+    <Grid RowDefinitions="Auto,*" 
+          Background="{DynamicResource AppBackground}">
+        <Border Grid.Row="0" 
+                     Background="{DynamicResource PanelBackground}" 
+                     BorderBrush="{DynamicResource PanelBorder}" 
+                     BorderThickness="0,0,0,1">
             <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto" Margin="16,7">
-                <TextBlock Text="{Binding ErrorMessage}" Foreground="{DynamicResource ErrorForeground}" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding ErrorMessage}" 
+                           Foreground="{DynamicResource ErrorForeground}" 
+                           VerticalAlignment="Center" />
                 <Button Grid.Column="1"
                         Content="−"
                         Command="{Binding ZoomOutCommand}"
@@ -55,8 +61,8 @@
                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
                  ScrollViewer.VerticalScrollBarVisibility="Auto" />
         <controls:MarkdownPreviewControl Grid.Row="1"
-                                         Markdown="{Binding Content}"
                                          Zoom="{Binding Zoom}"
+                                         Markdown="{Binding Content}"
                                          IsVisible="{Binding IsPreview}" />
-    </Grid>
+    </Grid>                              
 </UserControl>
