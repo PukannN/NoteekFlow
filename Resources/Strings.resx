@@ -117,4 +117,5 @@
   <data name="BackgroundLight" xml:space="preserve"><value>Warm background</value></data>
   <data name="BackgroundWhite" xml:space="preserve"><value>White background</value></data>
   <data name="BackgroundDark" xml:space="preserve"><value>Dark background</value></data>
+    <data name="ConfirmCanvasClean" xml:space="preserve"><value>Are you sure you want to clean this canvas?</value></data>
 </root>

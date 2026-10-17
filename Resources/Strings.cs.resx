@@ -117,4 +117,5 @@
   <data name="BackgroundLight" xml:space="preserve"><value>Teplé pozadí</value></data>
   <data name="BackgroundWhite" xml:space="preserve"><value>Bílé pozadí</value></data>
   <data name="BackgroundDark" xml:space="preserve"><value>Tmavé pozadí</value></data>
+  <data name="ConfirmCanvasClean" xml:space="preserve"><value>Opravdu chcete smazat tento cavas?</value></data>
 </root>
