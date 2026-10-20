@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -81,11 +85,14 @@ public partial class PdfViewModel : ZoomableFileContentViewModel
                 using var stream = new MemoryStream(bytes);
                 Pages.Add(new Bitmap(stream));
             }
+
+
             ErrorMessage = null;
             OnPropertyChanged(nameof(CurrentPage));
             OnPropertyChanged(nameof(PageInfo));
             OnPropertyChanged(nameof(CanGoToPreviousPage));
             OnPropertyChanged(nameof(CanGoToNextPage));
+            OnZoomLevelChanged(); // without this, a page wont load properly the first time the pdf loads
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException
             or InvalidDataException or ArgumentException or InvalidOperationException or DllNotFoundException
@@ -97,7 +104,7 @@ public partial class PdfViewModel : ZoomableFileContentViewModel
         }
     }
 
-    private static IReadOnlyList<byte[]> RenderPages(string filePath)
+    private static async Task<IReadOnlyList<byte[]>> RenderPages(string filePath)
     {
         if (OperatingSystem.IsWindows()
             || OperatingSystem.IsLinux()
@@ -108,17 +115,22 @@ public partial class PdfViewModel : ZoomableFileContentViewModel
             || OperatingSystem.IsMacCatalystVersionAtLeast(13, 5))
         {
             using var stream = File.OpenRead(filePath);
-            var pages = new List<byte[]>();
-            foreach (var page in Conversion.ToImages(stream))
-            {
-                using (page)
-                using (var encoded = page.Encode(SKEncodedImageFormat.Png, 100))
-                {
-                    pages.Add(encoded.ToArray());
-                }
-            }
+            var rawPages = Conversion.ToImages(stream).ToList();
+            var encodedPages = new byte[rawPages.Count][];
+            
+            Debug.Print($"{rawPages.Count}");
 
-            return pages;
+            Parallel.For(0, rawPages.Count, i =>
+            {
+                //ToImages returns all pages of pdf pages
+                using var page = rawPages[i];
+                using var encoded = page.Encode(SKEncodedImageFormat.Jpeg, 100);
+                Debug.Print("Decoded");
+
+                encodedPages[i] = encoded.ToArray();
+            });
+
+            return encodedPages;
         }
 
         throw new PlatformNotSupportedException();

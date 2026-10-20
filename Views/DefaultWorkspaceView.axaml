@@ -10,15 +10,15 @@
                     VerticalAlignment="Center"
                     Spacing="12">
             <TextBlock Text="{x:Static loc:Strings.WelcomeTitle}"
-                       Foreground="{DynamicResource TextPrimary}"
-                       HorizontalAlignment="Center"
-                       FontSize="26"
-                       FontWeight="SemiBold" />
-        <TextBlock Text="{Binding Message}"
-                   Foreground="{DynamicResource TextSecondary}"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="14" />
+                        Foreground="{DynamicResource TextPrimary}"
+                        HorizontalAlignment="Center"
+                        FontSize="26"
+                        FontWeight="SemiBold" />
+            <TextBlock Text="{Binding Message}"
+                        Foreground="{DynamicResource TextSecondary}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="14" />
         </StackPanel>
     </Grid>
 </UserControl>

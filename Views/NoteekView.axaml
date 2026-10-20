@@ -6,11 +6,11 @@
              x:Class="NoteekFlow.Views.NoteekView"
              x:DataType="vm:NoteekViewModel">
     <Grid RowDefinitions="Auto, *" Background="{DynamicResource AppBackground}">
-        <Border Grid.Row="0" 
-                     Background="{DynamicResource PanelBackground}" 
-                     BorderBrush="{DynamicResource PanelBorder}" 
-                     BorderThickness="0,0,0,1"
-                     ZIndex="2">
+        <Border Grid.Row="0"
+                Background="{DynamicResource PanelBackground}"
+                BorderBrush="{DynamicResource PanelBorder}"
+                BorderThickness="0,0,0,1"
+                ZIndex="2">
             <Grid RowDefinitions="Auto,Auto" Margin="12,5">
                 <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto">
                     <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
@@ -24,6 +24,7 @@
                             Command="{Binding ZoomOutCommand}"
                             ToolTip.Tip="{x:Static loc:Strings.ZoomOut}"
                             Classes="toolbar"
+                            HotKey="Ctrl+o"
                             Margin="0,0,4,0" />
                     <Button Grid.Column="2"
                             Content="{Binding ZoomLabel}"
@@ -36,6 +37,7 @@
                             Command="{Binding ZoomInCommand}"
                             ToolTip.Tip="{x:Static loc:Strings.ZoomIn}"
                             Classes="toolbar"
+                            HotKey="Ctrl+i"
                             Margin="0,0,8,0" />
                     <Button Grid.Column="4"
                             Content="{x:Static loc:Strings.Edit}"
@@ -78,16 +80,16 @@
             </Grid>
         </Border>
         <controls:InkCanvasControl Grid.Row="1"
-                                        x:Name="InkCanvas"
-                                        Strokes="{Binding Strokes}"
-                                        Tool="{Binding CurrentTool}"
-                                        StrokeColor="{Binding StrokeColor}"
-                                        StrokeWidth="{Binding StrokeWidth}"
-                                        Zoom="{Binding Zoom}"
-                                        CanvasColor="{Binding BackgroundColor}"
-                                        ShowGrid="{Binding ShowGrid}"
-                                        IsEnabled="{Binding IsEditing}"
-                                        Background="{DynamicResource CanvasBackground}"
-                                        ZIndex="1" />
+                                   x:Name="InkCanvas"
+                                   Strokes="{Binding Strokes}"
+                                   Tool="{Binding CurrentTool}"
+                                   StrokeColor="{Binding StrokeColor}"
+                                   StrokeWidth="{Binding StrokeWidth}"
+                                   Zoom="{Binding Zoom}"
+                                   CanvasColor="{Binding BackgroundColor}"
+                                   ShowGrid="{Binding ShowGrid}"
+                                   IsEnabled="{Binding IsEditing}"
+                                   Background="{DynamicResource CanvasBackground}"
+                                   ZIndex="1" />
     </Grid>
 </UserControl>
