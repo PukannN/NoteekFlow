@@ -118,14 +118,11 @@ public partial class PdfViewModel : ZoomableFileContentViewModel
             var rawPages = Conversion.ToImages(stream).ToList();
             var encodedPages = new byte[rawPages.Count][];
             
-            Debug.Print($"{rawPages.Count}");
-
             Parallel.For(0, rawPages.Count, i =>
             {
                 //ToImages returns all pages of pdf pages
                 using var page = rawPages[i];
                 using var encoded = page.Encode(SKEncodedImageFormat.Jpeg, 100);
-                Debug.Print("Decoded");
 
                 encodedPages[i] = encoded.ToArray();
             });

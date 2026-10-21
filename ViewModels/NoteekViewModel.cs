@@ -219,7 +219,7 @@ public partial class NoteekViewModel : ZoomableFileContentViewModel
             Kind = "Text",
             Color = StrokeColor,
             Text = text,
-            Width = 18
+            Width = 20
         };
         element.Points.Add(new InkPoint(position.X, position.Y));
         Strokes.Add(element);

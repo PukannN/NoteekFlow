@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Documents;
@@ -112,6 +113,7 @@ public partial class MarkdownPreviewControl : UserControl
                     });
                     break;
                 case ListBlock list:
+                    Debug.Print("list called");
                     AddList(content, list);
                     break;
                 case QuoteBlock quote:
@@ -174,11 +176,12 @@ public partial class MarkdownPreviewControl : UserControl
 
             foreach (var child in listItem)
             {
+
                 if (child is ParagraphBlock paragraph)
                 {
-                    var text = CreateTextBlock(paragraph.Inline, 16 * Zoom, FontWeight.Normal);
-                    text.Text = $"{(list.IsOrdered ? $"{index++}." : "•")} {text.Text}";
-                    text.Margin = new Thickness(18, 0, 0, 0);
+                    var text = CreateTextBlock(paragraph.Inline, 16 * Zoom, FontWeight.Light);
+                    text.Text = $"{(list.IsOrdered ? $"{index++}." : "•")} {text.Inlines.Text}";
+                    text.Margin = new Thickness(14, 0, 0, 0);
                     content.Children.Add(text);
                 }
             }

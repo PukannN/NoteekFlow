@@ -6,6 +6,7 @@
 - accent color doesn't change selected tab and file colors
 - add an option to copy file the current workspace
 - make an unified controler
+- tweak color shades to for bright mode
 
 ## Noteek
 - implement color picker for predefined brush and grid colors
@@ -13,11 +14,10 @@
 - add icons for Noteek controler (Pen, Eraser, ...)
 
 ## Markdown
-- fix `list` elements not displaying in preview
 
 
 ## Images
-- 
+
 
 ## PDF
 - fix, if possible, long loading of bigger pdfs
