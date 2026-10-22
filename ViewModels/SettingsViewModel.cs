@@ -143,7 +143,7 @@ public partial class SettingsViewModel : ViewModelBase
     {
         ["AppBackground"] = "#F5F6F8",
         ["PanelBackground"] = "#FFFFFF",
-        ["PanelSecondary"] = "#ECEEF2",
+        ["PanelSecondary"] = "#dbdbdd",
         ["PanelRaised"] = "#E5E8ED",
         ["PanelBorder"] = "#D1D5DC",
         ["ButtonBackground"] = "#E3E6EB",
@@ -172,9 +172,9 @@ public partial class SettingsViewModel : ViewModelBase
 
         var accent = AccentColor switch
         {
-            "Green" => ("#26734D", "#398D63"),
-            "Purple" => ("#6941A5", "#825BC1"),
-            _ => ("#315B87", "#4778A8")
+            "Green" => ("#86c4a5", "#398D63"),
+            "Purple" => ("#9778c7", "#825BC1"),
+            _ => ("#6089b4", "#4778A8")
         };
         application.Resources["AccentBackground"] = new SolidColorBrush(Color.Parse(accent.Item1));
         application.Resources["AccentBorder"] = new SolidColorBrush(Color.Parse(accent.Item2));

@@ -1,11 +1,10 @@
 # TODO
 
 ## NoteekFlow
-- add settings for shortcut
+- add shortcut settings
 - add icons for shared and app controls(Zoom, Settings, ...)
 - accent color doesn't change selected tab and file colors
-- add an option to copy file the current workspace
-- make an unified controler
+- add the option to copy files from system the to the workspace
 - tweak color shades to for bright mode
 
 ## Noteek
